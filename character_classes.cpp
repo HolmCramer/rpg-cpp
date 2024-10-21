@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include "item_classes.cpp"
+#include <vector>
 
 class Gear {
 	public:
@@ -13,7 +14,7 @@ class Gear {
 	std::optional<Weapon> mainhand;
 	std::optional<Weapon> offhand;
 	
-	Gear(){};
+	Gear(){}
 
 	Gear(
 		Armor head,
@@ -141,6 +142,7 @@ class Characters {
 	int attackpower = 2;
 	int defense = 0;
 	Gear gear;
+	std::vector<Items> inventory;
 	
 	Characters () {}
 
@@ -316,6 +318,13 @@ class Characters {
 			}
 		}
 	}
+
+	std::vector<Items> get_inventory() {
+		std::vector<Items> result_ptr = this->inventory;
+		return this->inventory;
+	}
+
+
 };
 
 class Enemies: Characters {
