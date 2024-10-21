@@ -31,37 +31,94 @@ class Gear {
 		this->feet = feet;
 		this->mainhand = mainhand;
 		this->offhand = offhand;
-
 	}
 
-	bool is_equipped(GearSlot gearslot) {
+	bool is_equipped(GearSlot gear_slot) {
 		bool bool_result = false;
-		switch (gearslot) {
+		switch (gear_slot) {
 			case HEAD:
-				bool_result = head.has_value() ? true : false; 
+				if (head.has_value()) {
+					bool_result = true;
+				}
 				break;
 			case SHOULDERS:
-				bool_result = shoulders.has_value() ? true : false; 
+				if (shoulders.has_value()) {
+					bool_result = true;
+				}
 				break;
 			case CHEST:
-				bool_result = chest.has_value() ? true : false; 
+				if (chest.has_value()) {
+					bool_result = true;
+				}
 				break;
 			case LEGS:
-				bool_result = legs.has_value() ? true : false; 
+				if (legs.has_value()) {
+					bool_result = true;
+				}
 				break;
 			case FEET:
-				bool_result = feet.has_value() ? true : false; 
+				if (feet.has_value()) {
+					bool_result = true;
+				}
 				break;
 			case MAINHAND:
-				bool_result = mainhand.has_value() ? true : false; 
+				if (mainhand.has_value()) {
+					bool_result = true;
+				}
 				break;
 			case OFFHAND:
-				bool_result = offhand.has_value() ? true : false; 
+				if (offhand.has_value()) {
+					bool_result = true;
+				}
 				break;
 			default:
 				std::cout << "Couldn't match inputtype with any equipment...";
 		}
 		return bool_result;
+	}
+
+	Equipment* get_gear(GearSlot gear_slot) {
+		Equipment* gear_object = nullptr;
+		switch (gear_slot) {
+			case HEAD:
+				if (this->head.has_value()) {
+					gear_object = &this->head.value();
+				}
+				break;
+			case SHOULDERS:
+				if (this->shoulders.has_value()) {
+					gear_object = &this->shoulders.value();
+				}
+				break;
+			case CHEST:
+				if (this->chest.has_value()) {
+					gear_object = &this->chest.value();
+				}
+				break;
+			case LEGS:
+				if (this->legs.has_value()) {
+					gear_object = &this->legs.value();
+				}
+				break;
+			case FEET:
+				if (this->feet.has_value()) {
+					gear_object = &this->feet.value();
+				}
+				break;
+			case MAINHAND:
+				if (this->mainhand.has_value()) {
+					gear_object = &this->mainhand.value();
+				}
+				break;
+			case OFFHAND:
+				if (this->offhand.has_value()) {
+					gear_object = &this->offhand.value();
+				}
+				break;
+			default:
+				std::cout << "Couldn't match inputtype with any equipment...";
+		}
+		return gear_object;
 	}
 };
 
@@ -83,6 +140,7 @@ class Characters {
 	int crit_bonus = 200;
 	int attackpower = 2;
 	int defense = 0;
+	Gear gear;
 	
 	Characters () {}
 
@@ -122,11 +180,141 @@ class Characters {
 		this->attackpower = attackpower;
 		this->defense = defense;
 	}
-	
+
 	virtual void abstract() = 0;
 
 	void print_name() {
 		std::cout << name << "\n";
+	}
+
+	void update_atp() {
+		this->attackpower = this->strength * 2;
+	}
+
+	void calc_crit() {
+		if (this->crit_chance > 50) {
+			this->crit_chance -= this->crit_chance - 50;
+		}
+	}
+
+	void calc_crit_bonus() {
+		if (this->crit_chance > 50) {
+			this->crit_bonus += this->crit_chance - 50;
+		}
+	}
+
+	void update_crit() {
+		this->calc_crit_bonus();
+		this->calc_crit();
+	}
+
+	void increment_capacity() {
+		this->capacity += 1;
+	}
+
+	void increment_level() {
+		this->level += 1;
+		if (this->level % 2 == 0) {
+			this->increment_capacity();
+		}
+	}
+
+	int get_skillpoints() {
+		return this->skillpoints;
+	}
+
+	void increment_skillpoints() {
+		this->skillpoints += 1;
+	}
+
+	void decrement_skillpoints() {
+		this->skillpoints = this->skillpoints - 1 >= 1 ? this->skillpoints - 1 : 0;
+	}
+
+	int get_xp() {
+		return this->xp;
+	}
+
+	void add_xp(int xp) {
+		this->xp += xp;
+		if (this->xp / 10 > this->level) {
+			this->increment_level();
+			this->increment_skillpoints();
+		}
+	}
+
+	int get_stamina() {
+		return this->stamina;
+	}
+
+	void increment_stamina() {
+		this->stamina += 1;
+	}
+
+	int get_max_health() {
+		return this->max_health;
+	}
+
+	void update_max_health() {
+		this->max_health = 10 * this->stamina;
+	}
+
+	int get_current_health() {
+		return this->current_health;
+	}
+
+	void set_current_health_to_max_health() {
+		this->current_health = this->max_health;
+	}
+
+	void update_current_health(int value) {
+		if (this->current_health + value >= this->max_health) {
+			this->current_health = this->max_health;
+		}
+		else if (this->current_health + value < 0) {
+			this->current_health = 0;
+		}
+		else {
+			this->current_health += value;
+		}
+	}
+
+	std::string get_health_display_str() {
+		std::string health_display = "(" + std::to_string(this->current_health) + "/" + std::to_string(this->max_health) + ")";
+		return health_display;
+	}
+
+	int get_max_rage() {
+		return this->max_rage;
+	}
+
+	void add_max_rage(int rage) {
+		this->max_rage += rage;
+	}
+
+	int get_current_rage() {
+		return this->current_rage;
+	}
+
+	void modify_current_rage(int rage) {
+		if (this->current_rage + rage <= this->max_rage && this->current_rage + rage >= 0) {
+			this->current_rage += rage;
+		}
+		else if (this->current_rage + rage < 0) {
+			this->current_rage = 0;
+		}
+		else if (this->current_rage + rage > this->max_rage) {
+			this->current_rage = this->max_rage;
+		}
+	}
+
+	void print_equipment() {
+		for (int i; i < static_cast<int>(GearSlot::GEAR_SLOT_COUNT); i++) {
+			GearSlot slot = static_cast<GearSlot>(i);
+			if (this->gear.is_equipped(slot)) {
+				//std::cout << 
+			}
+		}
 	}
 };
 

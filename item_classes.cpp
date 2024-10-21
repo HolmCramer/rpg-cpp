@@ -4,14 +4,16 @@ enum ArmorType {
 	CLOTH,
 	LEATHER,
 	MAIL,
-	PLATE
+	PLATE,
+	ARMOR_TYPE_COUNT
 };
 
 enum Rarity {
 	COMMON,
 	RARE,
 	EPIC,
-	LEGENDARY	
+	LEGENDARY,
+	RARITY_COUNT
 };
 
 enum GearSlot {
@@ -21,7 +23,8 @@ enum GearSlot {
 	LEGS,
 	FEET,
 	MAINHAND,
-	OFFHAND
+	OFFHAND,
+	GEAR_SLOT_COUNT
 };
 
 class Items {
@@ -56,7 +59,7 @@ class Potions: public Items {
 	public:
 		int health_value;
 
-		Potions (
+		Potions(
 			int level,
 			Rarity rarity,
 			std::string name,

@@ -1,6 +1,19 @@
 #include <iostream>
 #include "character_classes.cpp"
 #include "utils.cpp"
+#include <random>
+#include <cmath>
+
+void damage_calc(Characters &attacker, Characters &defender) {
+	std::random_device rd;
+	std::mt19937 engine(rd());
+	std::uniform_int_distribution<int> dist(1, 100);
+	int roll = dist(engine);
+	bool crit_flag = roll <= attacker.crit_chance ? true : false;
+	float damage = crit_flag == true ? attacker.attackpower * attacker.crit_bonus / 100 : attacker.attackpower;
+	damage = damage > defender.defense ? std::round(damage-defender.defense) : 1;
+	//missing some more stuff...
+}
 
 int story_screen() {
 	return 0;
@@ -39,5 +52,8 @@ int run() {
 		enemy.print_name();
 		break;
 	}
+
+	std::cout << holmo.get_health_display_str();
+
 	return 0;
 }
