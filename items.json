@@ -1,0 +1,160 @@
+{
+    "common": {
+        "armor": {
+            "cloth": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "leather": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "mail": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "plate": {
+                "head": [
+                    {
+                        "name": "Broken Helmet",
+                        "weight": 3,
+                        "armor_value": 1
+                    }
+                ],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            }
+        },
+        "melee_weapons": [],
+        "ranged_weapons": [],
+        "potions": [
+            {
+                "name": "Weak Health Potion",
+                "weight": 1,
+                "hp_value": 10
+            }
+        ]
+    },
+    "rare": {
+        "armor": {
+            "cloth": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "leather": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "mail": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "plate": {
+                "head": [
+                    {
+                        "name": "Standard Helmet",
+                        "weight": 5,
+                        "armor_value": 3
+                    }
+                ],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            }
+        },
+        "melee_weapons": [],
+        "ranged_weapons": [],
+        "potions": []
+    },
+    "epic": {
+        "armor": {
+            "cloth": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "leather": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "mail": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "plate": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            }
+        },
+        "melee_weapons": [],
+        "ranged_weapons": [],
+        "potions": []
+    },
+    "legendary": {
+        "armor": {
+            "cloth": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "leather": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "mail": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            },
+            "plate": {
+                "head": [],
+                "shoulders": [],
+                "chest": [],
+                "legs": [],
+                "feet": []
+            }
+        },
+        "melee_weapons": [],
+        "ranged_weapons": [],
+        "potions": []
+    }
+}

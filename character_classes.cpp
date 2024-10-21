@@ -59,7 +59,7 @@ class Gear {
 				bool_result = offhand.has_value() ? true : false; 
 				break;
 			default:
-				cout << "Couldn't match inputtype with any equipment...";
+				std::cout << "Couldn't match inputtype with any equipment...";
 		}
 		return bool_result;
 	}
@@ -67,7 +67,7 @@ class Gear {
 
 class Characters {
 	public:
-	string name = "default";
+	std::string name = "default";
 	int level = 1;
 	int skillpoints = 1;
 	int xp = 10;
@@ -87,7 +87,7 @@ class Characters {
 	Characters () {}
 
 	Characters (
-		string name,
+		std::string name,
 		int level,
 		int skillpoints,
 		int xp,
@@ -126,63 +126,105 @@ class Characters {
 	virtual void abstract() = 0;
 
 	void print_name() {
-		cout << name << "\n";
+		std::cout << name << "\n";
 	}
 };
 
 class Enemies: Characters {
 	public:
-	string name = "Enemy";
 
-	Enemies (
-		int b,
-		int c,
-		int d,
-		int e,
-		int f,
-		int g,
-		int h,
-		int i,
-		int j,
-		int k,
-		int l,
-		int m,
-		int n,
-		int o,
-		int p
+	Enemies(){}
+
+	Enemies(
+		std::string name,
+		int level,
+		int skillpoints,
+		int xp,
+		int capacity,
+		int stamina,
+		int max_health,
+		int current_health,
+		int max_rage,
+		int current_rage,
+		int energy,
+		int strength,
+		int crit_chance,
+		int crit_bonus,
+		int attackpower,
+		int defense
+		): Characters(
+			name,
+			level,
+			skillpoints,
+			xp,
+			capacity,
+			stamina,
+			max_health,
+			current_health,
+			max_rage,
+			current_rage,
+			energy,
+			strength,
+			crit_chance,
+			crit_bonus,
+			attackpower,
+			defense
 		)
 		{
-		level = b;
-		skillpoints = c;
-		xp = d;
-		capacity = e;
-		stamina = f;
-		max_health = g;
-		current_health = h;
-		max_rage = i;
-		current_rage = j;
-		energy = k;
-		strength = l;
-		crit_chance = m;
-		crit_bonus = n;
-		attackpower = o;
-		defense = p;
-	}
+		}
 	
 	virtual void abstract() override {};
 
 	void print_name() {
-		cout << name << "\n";
+		std::cout << name << "\n";
 	}
 };
 
 
 class Player: public Characters {
 	public:
-	using Characters::Characters;
+
+	Player(){}
+
+	Player(
+		std::string name,
+		int level,
+		int skillpoints,
+		int xp,
+		int capacity,
+		int stamina,
+		int max_health,
+		int current_health,
+		int max_rage,
+		int current_rage,
+		int energy,
+		int strength,
+		int crit_chance,
+		int crit_bonus,
+		int attackpower,
+		int defense
+		): Characters(
+			name,
+			level,
+			skillpoints,
+			xp,
+			capacity,
+			stamina,
+			max_health,
+			current_health,
+			max_rage,
+			current_rage,
+			energy,
+			strength,
+			crit_chance,
+			crit_bonus,
+			attackpower,
+			defense
+		){
+		}
 
 	virtual void abstract() override {};
 	void print_name() {
-		cout << name << "\n";
+		std::cout << name << "\n";
 	}
 };
