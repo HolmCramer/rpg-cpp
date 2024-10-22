@@ -23,10 +23,13 @@ void damage_calc(Characters &attacker, Characters &defender) {
 
 bool combat(Player player, Enemies enemy) {
 	bool result = false;
+	int ability;
 	while (true)
 	{
 		player.print_stats();
 		enemy.print_stats();
+		ability = player.choose_ability();
+		damage_calc(player, enemy);
 
 	}
 }
