@@ -51,7 +51,8 @@ int loot_level_screen() {
 }
 
 int run() {
-	Player holmo = Player("holmo", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
+	//Player holmo = Player("holmo", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
+	Player holmo = Player();
 	Enemies enemy = Enemies("Enemy", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
 	int difficulty = 0;
 	int round = 0;

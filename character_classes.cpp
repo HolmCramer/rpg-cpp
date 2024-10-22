@@ -142,7 +142,8 @@ class Characters {
 	int attackpower = 2;
 	int defense = 0;
 	Gear gear;
-	std::vector<Items> inventory;
+	std::vector<Items*> inventory;
+	std::string abilities[8] = {"Normal Attack", "Hard Attack"};
 	
 	Characters () {}
 
@@ -181,6 +182,9 @@ class Characters {
 		this->crit_bonus = crit_bonus;
 		this->attackpower = attackpower;
 		this->defense = defense;
+		this->update_atp();
+		this->update_max_health();
+		this->update_crit();
 	}
 
 	virtual void abstract() = 0;
@@ -319,11 +323,25 @@ class Characters {
 		}
 	}
 
-	std::vector<Items> get_inventory() {
-		std::vector<Items> result_ptr = this->inventory;
+	std::vector<Items*> get_inventory() {
 		return this->inventory;
 	}
 
+	void add_to_inventory(Items* item) {
+		this->inventory.push_back(item);
+		std::cout << item->name + " has been added to the inventory";
+	}
+
+	void print_inventory_names() {
+		std::cout << "Inventory: ";
+		for (Items* item: this->inventory) {
+			std::cout << item->name;
+		}
+	}
+
+	void print_stats() {
+		std::cout << "Name: " + this->name + ", Level: " + std::to_string(this->level) + ", XP: " + std::to_string(this->xp) + ", Capacity: " + std::to_string(this->capacity) + ", Attackpower: " + std::to_string(this->attackpower) + ", Health: " + this->get_health_display_str() + ", Energy: " + std::to_string(this->energy) + ", Stamina: " + std::to_string(this->stamina) + ", Strength: " + std::to_string(this->strength) + ", Crit chance: " + std::to_string(this->crit_chance) + "%, Crit damage bonus: " + std::to_string(this->crit_bonus) + "%";
+	}
 
 };
 
