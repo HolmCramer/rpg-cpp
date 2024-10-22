@@ -3,6 +3,9 @@
 #include <iostream>
 #include "item_classes.cpp"
 #include <vector>
+#include <random>
+#include <cmath>
+#include <algorithm>
 
 class Gear {
 	public:
@@ -345,7 +348,7 @@ class Characters {
 
 };
 
-class Enemies: Characters {
+class Enemies: public Characters {
 	public:
 
 	Enemies(){}
@@ -393,6 +396,22 @@ class Enemies: Characters {
 	void print_name() {
 		std::cout << name << "\n";
 	}
+
+	int choose_ability() {
+		std::cout << this->name + " is choosing its Ability!";
+		std::string ability_text = "";
+		for (int i; i < this->abilities->length(); i++) {
+			ability_text += "\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n"; 
+		}
+		std::cout << ability_text;
+		std::random_device rd;
+		std::mt19937 engine(rd());
+		std::uniform_int_distribution<int> dist(0, this->abilities->length());
+		int attack_roll = dist(engine);
+		std::cout << std::to_string(attack_roll + 1);
+		std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll] + " is used!";
+		return attack_roll;
+	}
 };
 
 
@@ -439,7 +458,63 @@ class Player: public Characters {
 		}
 
 	virtual void abstract() override {};
+
 	void print_name() {
 		std::cout << name << "\n";
+	}
+
+	void skill_up() {
+		int player_input;
+		while (this->skillpoints > 0) {
+			std::cout << "Choose Attribute to level up:\n 1 : Increase current Stamina[" + std::to_string(this->stamina) + "] by 1\n 2 : Increase current Strength[" + std::to_string(this->strength) + "] by 1\n 3 : Increase current Crit chance[" + std::to_string(this->crit_chance) + "%] by 1%\n";
+			std::cin >> player_input;
+			switch (player_input) {
+				case 1:
+					this->increment_stamina();
+					this->update_max_health();
+					this->update_current_health(10);
+					this->decrement_skillpoints();
+					std::cout << "You increased your Stamina to " << std::to_string(this->stamina) << " resulting in " << std::to_string(this->max_health) << " max HP";
+					break;
+				case 2:
+					this->strength += 1;
+					this->update_atp();
+					this->decrement_skillpoints();
+					std::cout << "You increased your Strength to " << std::to_string(this->strength) << " resulting in " << std::to_string(this->attackpower) << " ATP";
+					break;
+				case 3:
+					this->crit_chance += 1;
+					this->update_crit();
+					this->decrement_skillpoints();
+					std::cout << "You increased your Crit chance to " << std::to_string(this->crit_chance) << "%" << " and " << std::to_string(this->crit_bonus) << "%" << " Crit damage bonus";
+					break;
+				default:
+					std::cout << "Enter a valid number!";
+					break;
+			}
+		}
+	}
+
+	int choose_ability() {
+		std::cout << "How do you want to attack?\n";
+		std::string ability_text = "";
+		std::vector<int> options;
+		for (int i; i < this->abilities->length(); i++) {
+			ability_text += "\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n";
+			options.push_back(i+1);
+		}
+		int attack;
+		while (true) {
+			std::cout << ability_text;
+			std::cin >> attack;
+			if (std::find(options.begin(), options.end(), attack) != options.end()) {
+				break;
+			}
+			else {
+				std::cout << "Enter a valid number!";
+			}
+		}
+		std::cout << std::to_string(attack) << " - " << this->abilities[attack-1] << " is used!";
+		return attack;
 	}
 };
