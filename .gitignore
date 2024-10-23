@@ -1,9 +1,9 @@
 # VSCode
-/.vscode/
+.vscode/
 
 # Builds Stuff
-/build/*
-/.cache/
+build/
+.cache/
 
 # CMakePresets
 CMakePresets.json
