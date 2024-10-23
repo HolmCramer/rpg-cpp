@@ -3,6 +3,7 @@
 
 # Builds Stuff
 /build/*
+/.cache/
 
 # CMakePresets
 CMakePresets.json
