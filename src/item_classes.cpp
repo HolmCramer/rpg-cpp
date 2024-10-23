@@ -1,59 +1,49 @@
 #include "../include/item_classes.hpp"
 #include <string>
 
-class Items {
-	public:
-		int level = 1;
-		Rarity rarity = COMMON;
-		std::string name = "default";
-		int weight = 1;
-		std::string description = "default";
 
-		Items(){}
+Items::Items(){
+	//public:
+	int level = 1;
+	Rarity rarity = COMMON;
+	std::string name = "default";
+	int weight = 1;
+	std::string description = "default";
+}
 
-		Items(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description
-		){
-			this->level = level;
-			this->rarity = rarity;
-			this->name = name;
-			this->weight = weight;
-			this->description = description;		
-		}
+Items::Items(
+	int level,
+	Rarity rarity,
+	std::string name,
+	int weight,
+	std::string description
+){
+	this->level = level;
+	this->rarity = rarity;
+	this->name = name;
+	this->weight = weight;
+	this->description = description;		
+}
 
-		virtual void abstract() = 0;
-};
+Potions::Potions(
+	int level,
+	Rarity rarity,
+	std::string name,
+	int weight,
+	std::string description,
+	int health_value
+): Items(
+	level,
+	rarity,
+	name,
+	weight,
+	description
+)
+{	
+	this->health_value = health_value;
+}
 
-
-class Potions: public Items {
-	public:
-		int health_value;
-
-		Potions(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description,
-			int health_value
-		): Items(
-			level,
-			rarity,
-			name,
-			weight,
-			description
-		)
-		{	
-			this->health_value = health_value;
-		}
-
-		virtual void abstract() override {};
-};
-
+void Potions::abstract() {int test=0};
 
 class Equipment: public Items {
 	public:

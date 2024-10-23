@@ -1,5 +1,6 @@
 #ifndef ITEM_CLASSES
 #define ITEM_CLASSES
+#include <string>
 
 enum ArmorType {
 	CLOTH,
@@ -46,7 +47,7 @@ class Items {
 			std::string description
 		);
 
-		//virtual void abstract();
+		virtual void abstract() = 0;
 };
 
 
@@ -63,7 +64,7 @@ class Potions: public Items {
 			int health_value
 		);
 
-		//virtual void abstract();
+		virtual void abstract() override {};
 };
 
 
