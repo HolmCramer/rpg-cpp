@@ -1,3 +1,0 @@
-C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build/CMakeFiles/rpg-cpp.dir
-C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build/CMakeFiles/edit_cache.dir
-C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build/CMakeFiles/rebuild_cache.dir
