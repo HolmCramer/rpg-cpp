@@ -1,5 +1,5 @@
-#include <iostream>
 #include "../include/utils.hpp"
+#include <iostream>
 #include "../include/character_classes.hpp"
 #include <random>
 #include <cmath>

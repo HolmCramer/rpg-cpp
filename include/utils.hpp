@@ -1,6 +1,5 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
-#include "character_classes.hpp"
 
 enum Difficulty {
 	LOWER = -1,
@@ -15,7 +14,5 @@ void clr_scr();
 void set_terminal_size();
 
 void continue_promt();
-
-Enemy gen_enemy(int round, int difficulty);
 
 #endif //UTILS_HPP

@@ -51,7 +51,7 @@ class Items
 	std::string description
 	);
 
-	virtual void abstract() = 0;
+	virtual ~Items() = 0;
 };
 
 
@@ -70,7 +70,7 @@ class Potions: public Items
 		int health_value
 	);
 
-	void abstract() override;
+	virtual ~Potions();
 };
 
 
@@ -90,6 +90,8 @@ class Equipment: public Items
 		std::string description,
 		GearSlot gear_slot
 	);
+
+	virtual ~Equipment() = 0;
 };
 
 
@@ -112,7 +114,7 @@ class Armor: public Equipment
 		int armor_value
 	);
 
-	void abstract() override;
+	virtual ~Armor();
 };
 
 
@@ -133,7 +135,7 @@ class Weapon: public Equipment
 		int weapon_damage
 	);
 
-	void abstract() override;
+	virtual ~Weapon();
 };
 
 #endif //ITEM_CLASSES_HPP

@@ -1,8 +1,8 @@
+#include "../include/character_classes.hpp"
 #include <optional>
 #include <string>
 #include <iostream>
 #include "../include/item_classes.hpp"
-#include "../include/character_classes.hpp"
 #include <vector>
 #include <random>
 #include <cmath>

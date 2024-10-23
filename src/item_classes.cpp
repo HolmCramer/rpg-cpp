@@ -27,6 +27,8 @@ Items::Items
 	this->description = description;
 }
 
+Items::~Items() {}
+
 Potions::Potions
 (
 	int level,
@@ -47,6 +49,7 @@ Potions::Potions
 	this->health_value = health_value;
 }
 
+Potions::~Potions() {}
 
 Equipment::Equipment()
 {
@@ -73,6 +76,7 @@ Equipment::Equipment
 	this->gear_slot = gear_slot;
 }
 
+Equipment::~Equipment() {};
 
 Armor::Armor()
 {
@@ -104,6 +108,7 @@ Armor::Armor
 	this->armor_value = armor_value;
 }
 
+Armor::~Armor() {}
 
 Weapon::Weapon()
 {
@@ -131,3 +136,5 @@ Weapon::Weapon
 {
 	this->weapon_damage = weapon_damage;
 }
+
+Weapon::~Weapon() {}

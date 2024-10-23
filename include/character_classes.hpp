@@ -184,6 +184,8 @@ class Enemy: public Characters {
 	void print_name();
 
 	int choose_ability();
+	
+	Enemy gen_enemy(int round, int difficulty);
 };
 
 
