@@ -1,27 +1,13 @@
-cmake_minimum_required(VERSION 3.30.5)
+cmake_minimum_required(VERSION 3.30)
 
-project(rpg-cpp)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-include_directories(
-    ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/src
-)
+project(rpg-cpp VERSION 0.1.0)
 
-file(GLOB all_SRCS
-    "${PROJECT_SOURCE_DIR}/include/*.h"
-    "${PROJECT_SOURCE_DIR}/include/*.hpp"
-    "${PROJECT_SOURCE_DIR}/src/*.cpp"
-    "${PROJECT_SOURCE_DIR}/src/*.c"
-    )
+file(GLOB_RECURSE SRC_FILES ${PROJECT_SOURCE_DIR}/src *.cpp)
 
-# set(SOURCE_FILES
-#     main.cpp
-#     abilities.cpp
-#     character_classes.cpp
-#     game.cpp
-#     item_classes.cpp
-#     utils.cpp)
+add_executable(${PROJECT_NAME} ${SRC_FILES})
 
-# add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-
-add_executable(${PROJECT_NAME} ${all_SRCS})
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
