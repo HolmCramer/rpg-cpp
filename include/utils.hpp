@@ -1,5 +1,5 @@
-#ifndef UTILS
-#define UTILS
+#ifndef UTILS_HPP
+#define UTILS_HPP
 #include "character_classes.hpp"
 
 enum Difficulty {
@@ -18,4 +18,4 @@ void continue_promt();
 
 Enemy gen_enemy(int round, int difficulty);
 
-#endif //UTILS
+#endif //UTILS_HPP

@@ -5,28 +5,34 @@
 #include <cmath>
 
 
-void print_screen_seperator() {
+void print_screen_seperator()
+{
 	std::string seperator = "-";
-	for (int i; i < 130; i++) {
+	for (int i; i < 130; i++)
+	{
 		seperator += "-";
 	}
 	std::cout << seperator;
 }
 
-void clr_scr() {
+void clr_scr()
+{
 	std::cout << "\x1B[2J"; //cls
 }
 
-void set_terminal_size() {
+void set_terminal_size()
+{
 	std::cout << "\x1B[=18h";
 }
 
-void continue_promt() {
+void continue_promt()
+{
 	std::cout << "Press any key to continue: ";
-	std::cin;
+	std::cin.get();
 }
 
-Enemy gen_enemy(int round, int difficulty) {
+Enemy gen_enemy(int round, int difficulty)
+{
 	int level = round + difficulty;
 	int skillpoints = level;
 	int xp = level * 10;
@@ -41,8 +47,10 @@ Enemy gen_enemy(int round, int difficulty) {
 	int roll;
 	dist(engine);
 
-	while (skillpoints > 0) {
-		switch (roll = dist(engine)) {
+	while (skillpoints > 0)
+	{
+		switch (roll = dist(engine))
+		{
 			case 0:
 				stamina += 1;
                 skillpoints -= 1;

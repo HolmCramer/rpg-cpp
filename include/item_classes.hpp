@@ -1,8 +1,9 @@
-#ifndef ITEM_CLASSES
-#define ITEM_CLASSES
+#ifndef ITEM_CLASSES_HPP
+#define ITEM_CLASSES_HPP
 #include <string>
 
-enum ArmorType {
+enum ArmorType
+{
 	CLOTH,
 	LEATHER,
 	MAIL,
@@ -10,7 +11,8 @@ enum ArmorType {
 	ARMOR_TYPE_COUNT
 };
 
-enum Rarity {
+enum Rarity
+{
 	COMMON,
 	RARE,
 	EPIC,
@@ -18,7 +20,8 @@ enum Rarity {
 	RARITY_COUNT
 };
 
-enum GearSlot {
+enum GearSlot
+{
 	HEAD,
 	SHOULDERS,
 	CHEST,
@@ -29,103 +32,108 @@ enum GearSlot {
 	GEAR_SLOT_COUNT
 };
 
-class Items {
+class Items
+{
 	public:
-		int level;
-		Rarity rarity;
-		std::string name;
-		int weight;
-		std::string description;
+	int level;
+	Rarity rarity;
+	std::string name;
+	int weight;
+	std::string description;
 
-		Items();
+	Items();
 
-		Items(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description
-		);
+	Items(
+	int level,
+	Rarity rarity,
+	std::string name,
+	int weight,
+	std::string description
+	);
 
-		virtual void abstract() = 0;
+	virtual void abstract() = 0;
 };
 
 
-class Potions: public Items {
+class Potions: public Items
+{
 	public:
-		int health_value;
+	int health_value;
 
-		Potions(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description,
-			int health_value
-		);
+	Potions
+	(
+		int level,
+		Rarity rarity,
+		std::string name,
+		int weight,
+		std::string description,
+		int health_value
+	);
 
-		virtual void abstract() override {};
+	void abstract() override;
 };
 
 
-class Equipment: public Items {
+class Equipment: public Items
+{
 	public:
-		GearSlot gear_slot;
+	GearSlot gear_slot;
 		
-		Equipment();
+	Equipment();
 
-		Equipment(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description,
-			GearSlot gear_slot
-		);
-
-		//virtual void abstract();
+	Equipment
+	(
+		int level,
+		Rarity rarity,
+		std::string name,
+		int weight,
+		std::string description,
+		GearSlot gear_slot
+	);
 };
 
 
-class Armor: public Equipment {
+class Armor: public Equipment
+{
 	public:
-		ArmorType armor_type;
-		int armor_value;
+	ArmorType armor_type;
+	int armor_value;
 
-		Armor();
+	Armor();
 
-		Armor(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description,
-			GearSlot gear_slot,
-			ArmorType armor_type,
-			int armor_value
-		);
+	Armor(
+		int level,
+		Rarity rarity,
+		std::string name,
+		int weight,
+		std::string description,
+		GearSlot gear_slot,
+		ArmorType armor_type,
+		int armor_value
+	);
 
-		//virtual void abstract();
+	void abstract() override;
 };
 
 
-class Weapon: public Equipment {
+class Weapon: public Equipment
+{
 	public:
-		int weapon_damage;
+	int weapon_damage;
 
-		Weapon();
+	Weapon();
 
-		Weapon(
-			int level,
-			Rarity rarity,
-			std::string name,
-			int weight,
-			std::string description,
-			GearSlot gear_slot,
-			int weapon_damage
-		);
+	Weapon(
+		int level,
+		Rarity rarity,
+		std::string name,
+		int weight,
+		std::string description,
+		GearSlot gear_slot,
+		int weapon_damage
+	);
 
-		//virtual void abstract();
+	void abstract() override;
 };
 
-#endif //ITEM_CLASSES
+#endif //ITEM_CLASSES_HPP

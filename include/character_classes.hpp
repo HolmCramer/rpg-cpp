@@ -1,5 +1,5 @@
-#ifndef CHARACTER_CLASSES
-#define CHARACTER_CLASSES
+#ifndef CHARACTER_CLASSES_HPP
+#define CHARACTER_CLASSES_HPP
 #include <optional>
 #include "item_classes.hpp"
 #include <string>
@@ -219,4 +219,4 @@ class Player: public Characters {
 	int choose_ability();
 };
 
-#endif //CHARACTER_CLASSES
+#endif //CHARACTER_CLASSES_HPP

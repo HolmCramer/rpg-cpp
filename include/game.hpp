@@ -1,5 +1,5 @@
-#ifndef GAME
-#define GAME
+#ifndef GAME_HPP
+#define GAME_HPP
 #include "character_classes.hpp"
 
 void damage_calc(Characters &attacker, Characters &defender);
@@ -18,4 +18,4 @@ int loot_level_screen();
 
 int run();
 
-#endif //GAME
+#endif //GAME_HPP
