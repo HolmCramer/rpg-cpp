@@ -1,0 +1,38 @@
+[
+{
+  "directory": "C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/include\" -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/src\" -g -o CMakeFiles\\rpg-cpp.dir\\src\\abilities.cpp.obj -c \"C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\abilities.cpp\"",
+  "file": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\abilities.cpp",
+  "output": "CMakeFiles\\rpg-cpp.dir\\src\\abilities.cpp.obj"
+},
+{
+  "directory": "C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/include\" -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/src\" -g -o CMakeFiles\\rpg-cpp.dir\\src\\character_classes.cpp.obj -c \"C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\character_classes.cpp\"",
+  "file": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\character_classes.cpp",
+  "output": "CMakeFiles\\rpg-cpp.dir\\src\\character_classes.cpp.obj"
+},
+{
+  "directory": "C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/include\" -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/src\" -g -o CMakeFiles\\rpg-cpp.dir\\src\\game.cpp.obj -c \"C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\game.cpp\"",
+  "file": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\game.cpp",
+  "output": "CMakeFiles\\rpg-cpp.dir\\src\\game.cpp.obj"
+},
+{
+  "directory": "C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/include\" -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/src\" -g -o CMakeFiles\\rpg-cpp.dir\\src\\item_classes.cpp.obj -c \"C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\item_classes.cpp\"",
+  "file": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\item_classes.cpp",
+  "output": "CMakeFiles\\rpg-cpp.dir\\src\\item_classes.cpp.obj"
+},
+{
+  "directory": "C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/include\" -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/src\" -g -o CMakeFiles\\rpg-cpp.dir\\src\\main.cpp.obj -c \"C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\main.cpp\"",
+  "file": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\main.cpp",
+  "output": "CMakeFiles\\rpg-cpp.dir\\src\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\c++.exe -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/include\" -I\"C:/Users/Student/OneDrive - GFN GmbH (EDU)/FIAE Umschulung/rpg-cpp/src\" -g -o CMakeFiles\\rpg-cpp.dir\\src\\utils.cpp.obj -c \"C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\utils.cpp\"",
+  "file": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\FIAE Umschulung\\rpg-cpp\\src\\utils.cpp",
+  "output": "CMakeFiles\\rpg-cpp.dir\\src\\utils.cpp.obj"
+}
+]

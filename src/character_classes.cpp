@@ -1,7 +1,7 @@
 #include <optional>
 #include <string>
 #include <iostream>
-#include "item_classes.cpp"
+#include "../include/item_classes.hpp"
 #include <vector>
 #include <random>
 #include <cmath>

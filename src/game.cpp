@@ -1,6 +1,6 @@
 #include <iostream>
-#include "character_classes.cpp"
-#include "utils.cpp"
+#include "../include/character_classes.hpp"
+#include "../include/utils.hpp"
 #include <random>
 #include <cmath>
 

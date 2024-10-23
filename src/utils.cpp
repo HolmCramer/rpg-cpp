@@ -1,13 +1,9 @@
 #include <iostream>
-#include "character_classes.cpp"
+#include "../include/utils.hpp"
+#include "../include/character_classes.hpp"
 #include <random>
 #include <cmath>
 
-enum Difficulty {
-	LOWER = -1,
-	NORMAL = 0,
-	HIGHER = 1
-};
 
 void print_screen_seperator() {
 	std::string seperator = "-";
