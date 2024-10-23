@@ -30,7 +30,7 @@ void continue_promt() {
 	std::cin;
 }
 
-Enemies gen_enemy(int round, int difficulty) {
+Enemy gen_enemy(int round, int difficulty) {
 	int level = round + difficulty;
 	int skillpoints = level;
 	int xp = level * 10;
@@ -63,4 +63,6 @@ Enemies gen_enemy(int round, int difficulty) {
 				std::cout << "error assigning mob skillpoints";
 		}
 	}
+	Enemy enemy = Enemy("Enemy", level, skillpoints, xp, stamina, strength, crit_chance);
+	return enemy;
 }

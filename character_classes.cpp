@@ -144,7 +144,7 @@ class Characters {
 	int crit_bonus = 200;
 	int attackpower = 2;
 	int defense = 0;
-	Gear gear;
+	Gear gear = Gear();
 	std::vector<Items*> inventory;
 	std::string abilities[8] = {"Normal Attack", "Hard Attack"};
 	
@@ -189,6 +189,28 @@ class Characters {
 		this->update_max_health();
 		this->update_crit();
 	}
+
+	Characters(
+			std::string name,
+			int level,
+			int skillpoints,
+			int xp,
+			int stamina,
+			int strength,
+			int crit_chance
+		)
+		{
+			this->name = name;
+			this->level = level;
+			this->skillpoints = skillpoints;
+			this->xp = xp;
+			this->stamina = stamina;
+			this->strength = strength;
+			this->crit_chance = crit_chance;
+			this->update_atp();
+			this->update_max_health();
+			this->update_crit();
+		}
 
 	virtual void abstract() = 0;
 
@@ -348,12 +370,12 @@ class Characters {
 
 };
 
-class Enemies: public Characters {
+class Enemy: public Characters {
 	public:
 
-	Enemies(){}
+	Enemy(){}
 
-	Enemies(
+	Enemy(
 		std::string name,
 		int level,
 		int skillpoints,
@@ -387,9 +409,25 @@ class Enemies: public Characters {
 			crit_bonus,
 			attackpower,
 			defense
-		)
-		{
-		}
+		) {}
+
+		Enemy(
+		std::string name,
+		int level,
+		int skillpoints,
+		int xp,
+		int stamina,
+		int strength,
+		int crit_chance
+		): Characters(
+			name,
+			level,
+			skillpoints,
+			xp,
+			stamina,
+			strength,
+			crit_chance
+		) {}
 	
 	virtual void abstract() override {};
 
