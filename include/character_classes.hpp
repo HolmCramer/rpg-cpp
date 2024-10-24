@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CHARACTER_CLASSES_HPP
 #define CHARACTER_CLASSES_HPP
 #include <optional>
@@ -184,8 +185,6 @@ class Enemy: public Characters {
 	void print_name();
 
 	int choose_ability();
-	
-	Enemy gen_enemy(int round, int difficulty);
 };
 
 

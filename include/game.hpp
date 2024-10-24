@@ -1,20 +1,36 @@
+#pragma once
 #ifndef GAME_HPP
 #define GAME_HPP
 #include "character_classes.hpp"
 
-void damage_calc(Characters &attacker, Characters &defender);
+int damage_calc(Characters *attacker, Characters *defender);
 
-bool combat(Player player, Enemy enemy);
+bool combat(Player *player, Enemy *enemy);
 
-int story_screen();
+int story_screen(int *round);
 
-int status_screen();
+int status_screen(int *round, Player *player);
 
-int route_screen();
+int difficulty_option(int *difficulty);
 
-int combat_screen();
+int rest_option(Player *player, bool *rest_flag);
 
-int loot_level_screen();
+int route_screen
+(
+    int *round,
+	int *difficulty,
+	bool *rest_flag,
+	Player *player
+);
+
+bool combat_screen
+(
+    int *round,
+    int *difficulty,
+    Player *player
+);
+
+int loot_level_screen(Player *player);
 
 int run();
 

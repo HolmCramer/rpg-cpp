@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ITEM_CLASSES_HPP
 #define ITEM_CLASSES_HPP
 #include <string>

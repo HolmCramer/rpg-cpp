@@ -31,9 +31,9 @@ void continue_promt()
 	std::cin.get();
 }
 
-Enemy gen_enemy(int round, int difficulty)
+Enemy gen_enemy(int *round, int *difficulty)
 {
-	int level = round + difficulty;
+	int level = *round + *difficulty;
 	int skillpoints = level;
 	int xp = level * 10;
 	int capacity = 10 + (level / 2);
