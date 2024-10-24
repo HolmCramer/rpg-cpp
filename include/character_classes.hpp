@@ -86,8 +86,6 @@ class Characters {
 			int crit_chance
 		);
 
-	//virtual void abstract();
-
 	void print_name();
 
 	void update_atp();

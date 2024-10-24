@@ -13,11 +13,11 @@ int damage_calc(Characters* attacker, Characters* defender) {
 	float damage = crit_flag == true ? attacker->attackpower * attacker->crit_bonus / 100 : attacker->attackpower;
 	damage = damage > defender->defense ? std::round(damage-defender->defense) : 1;
 	defender->update_current_health(-damage);
-	if (crit_flag) 
+	if (crit_flag)
 	{
 		std::cout << attacker->name + " dealt *" + std::to_string(damage) + "* !CRITICAL DAMAGE! to " + defender->name + "bringing his HP down to " + defender->get_health_display_str();
 	}
-	else 
+	else
 	{
 		std::cout << attacker->name + " dealt (" + std::to_string(damage) + ") Damage to " + defender->name + "bringing his HP down to " + defender->get_health_display_str(); 
 	}
@@ -81,6 +81,7 @@ int status_screen(int* round, Player* player)
 
 int difficulty_option(int* difficulty)
 {
+	int number = 'n';
 	char input;
 	Difficulty option;
 	std::cout << "The current difficulty level is at " << std::to_string(*difficulty) << "\n";
@@ -187,11 +188,10 @@ int loot_level_screen(Player* player)
 }
 
 int run() {
-	//Player player = Player("holmo", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
 	Player player = Player("holmo");
 	Enemy enemy;
 	int difficulty = 0;
-	int round = 0;
+	int round = 1;
 	bool rest_flag = false;
 	while(true)
 	{

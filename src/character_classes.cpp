@@ -221,9 +221,22 @@ Characters::Characters
 	this->level = level;
 	this->skillpoints = skillpoints;
 	this->xp = xp;
+	this->capacity = 100;
 	this->stamina = stamina;
+	this->max_health = 10 * stamina;
+	this->current_health = max_health;
+	this->max_rage = 100;
+	this->current_rage = 0;
+	this->energy = 100;
 	this->strength = strength;
+	this->attackpower = 2 * strength;
 	this->crit_chance = crit_chance;
+	this->crit_bonus = 200;
+	this->defense = 0;
+	this->gear = Gear();
+	this->inventory;
+	this->abilities[0] = "Normal Attack";
+	this->abilities[1] = "Hard Attack";
 	this->update_atp();
 	this->update_max_health();
 	this->update_crit();
@@ -573,22 +586,22 @@ void Player::skill_up()
 				this->update_max_health();
 				this->update_current_health(10);
 				this->decrement_skillpoints();
-				std::cout << "You increased your Stamina to " << std::to_string(this->stamina) << " resulting in " << std::to_string(this->max_health) << " max HP";
+				std::cout << "You increased your Stamina to " << std::to_string(this->stamina) << " resulting in " << std::to_string(this->max_health) << " max HP\n";
 				break;
 			case 2:
 				this->strength += 1;
 				this->update_atp();
 				this->decrement_skillpoints();
-				std::cout << "You increased your Strength to " << std::to_string(this->strength) << " resulting in " << std::to_string(this->attackpower) << " ATP";
+				std::cout << "You increased your Strength to " << std::to_string(this->strength) << " resulting in " << std::to_string(this->attackpower) << " ATP\n";
 				break;
 			case 3:
 				this->crit_chance += 1;
 				this->update_crit();
 				this->decrement_skillpoints();
-				std::cout << "You increased your Crit chance to " << std::to_string(this->crit_chance) << "%" << " and " << std::to_string(this->crit_bonus) << "%" << " Crit damage bonus";
+				std::cout << "You increased your Crit chance to " << std::to_string(this->crit_chance) << "%" << " and " << std::to_string(this->crit_bonus) << "%" << " Crit damage bonus\n";
 				break;
 			default:
-				std::cout << "Enter a valid number!";
+				std::cout << "Enter a valid number!\n";
 				break;
 		}
 	}
@@ -599,9 +612,10 @@ int Player::choose_ability()
 	std::cout << "How do you want to attack?\n";
 	std::string ability_text = "";
 	std::vector<int> options;
+	options.reserve(4);
 	for (int i; i < this->abilities->length(); i++)
 	{
-		ability_text += "\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n";
+		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n");
 		options.push_back(i+1);
 	}
 	int attack;
