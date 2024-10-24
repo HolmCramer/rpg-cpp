@@ -4,7 +4,7 @@
 #include <random>
 #include <cmath>
 
-int damage_calc(Characters *attacker, Characters *defender) {
+int damage_calc(Characters* attacker, Characters* defender) {
 	std::random_device rd;
 	std::mt19937 engine(rd());
 	std::uniform_int_distribution<int> dist(1, 100);
@@ -24,7 +24,7 @@ int damage_calc(Characters *attacker, Characters *defender) {
 	return EXIT_SUCCESS;
 }
 
-bool combat(Player *player, Enemy *enemy)
+bool combat(Player* player, Enemy* enemy)
 {
 	bool result = false;
 	int ability;
@@ -58,7 +58,7 @@ bool combat(Player *player, Enemy *enemy)
 	return result;
 }
 
-int story_screen(int *round)
+int story_screen(int* round)
 {
 	print_screen_seperator();
 	std::cout << "It's round " << std::to_string(*round) << ", story will be added!\n";
@@ -66,7 +66,7 @@ int story_screen(int *round)
 	return EXIT_SUCCESS;
 }
 
-int status_screen(int *round, Player *player)
+int status_screen(int* round, Player* player)
 {
 	print_screen_seperator();
 	player->print_stats();
@@ -79,40 +79,42 @@ int status_screen(int *round, Player *player)
 	return EXIT_SUCCESS;
 }
 
-int difficulty_option(int *difficulty)
+int difficulty_option(int* difficulty)
 {
-	std::string input;
+	char input;
 	Difficulty option;
 	std::cout << "The current difficulty level is at " << std::to_string(*difficulty) << "\n";
+	std::cout << "Choose the difficulty level for the next round:\n + : increase the difficulty level\n - : lower the difficulty level\n Enter : remain at current level\n";
 	while (true)
 	{
-		std::cout << "Choose the difficulty level for the next round:\n + : increase the difficulty level\n - : lower the difficulty level\n Enter : remain at current level\n";
-		std::cin >> input;
-		if (input == "+")
+		std::cin.ignore();
+		input = std::cin.get();
+		if (input == '+')
 		{
 			*difficulty += 1;
 			std::cout << "You raised the difficulty level to " << std::to_string(*difficulty) << "\n";
 			return EXIT_SUCCESS;
 		}
-		else if (input == "-")
+		else if (input == '-')
 		{
 			*difficulty -= 1;
 			std::cout << "You lowered the difficulty level to " << std::to_string(*difficulty) << "\n";
 			return EXIT_SUCCESS;
 		}
-		else if (input == "")
+		else if (input == '\n')
 		{
 			std::cout << "You remain at the difficulty level of " << std::to_string(*difficulty) << "\n";
             return EXIT_SUCCESS;
 		}
 		else
 		{
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "Enter a valid option!\n";
 		}
 	}
 }
 
-int rest_option(Player *player, bool *rest_flag)
+int rest_option(Player* player, bool* rest_flag)
 {
 	std::string input;
 	while (true)
@@ -169,15 +171,14 @@ int route_screen
 	}
 }
 
-bool combat_screen(int *round, int *difficulty, Player *player)
+bool combat_screen(int* round, int* difficulty, Player* player, Enemy* enemy)
 {
 	print_screen_seperator();
-	Enemy enemy = gen_enemy(round, difficulty);
-	bool result = combat(player, &enemy);
+	bool result = combat(player, enemy);
 	return result;
 }
 
-int loot_level_screen(Player *player)
+int loot_level_screen(Player* player)
 {
 	print_screen_seperator();
 	player->skill_up();
@@ -186,9 +187,9 @@ int loot_level_screen(Player *player)
 }
 
 int run() {
-	Player player = Player("holmo", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
-	//Player holmo = Player();
-	Enemy enemy = Enemy("Enemy", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
+	//Player player = Player("holmo", 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15);
+	Player player = Player("holmo");
+	Enemy enemy;
 	int difficulty = 0;
 	int round = 0;
 	bool rest_flag = false;
@@ -198,7 +199,8 @@ int run() {
 		story_screen(&round);
 		status_screen(&round, &player);
 		route_screen(&round , &difficulty , &rest_flag, &player);
-		combat_screen(&round, &difficulty, &player);
+		enemy = gen_enemy(&round, &difficulty);
+		combat_screen(&round, &difficulty, &player, &enemy);
 		loot_level_screen(&player);
 		player.print_name();
 		enemy.print_name();

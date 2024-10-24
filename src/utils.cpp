@@ -8,11 +8,11 @@
 void print_screen_seperator()
 {
 	std::string seperator = "-";
-	for (int i; i < 130; i++)
+	for (int i; i < 115; i++)
 	{
 		seperator += "-";
 	}
-	std::cout << seperator;
+	std::cout << seperator << "\n";
 }
 
 void clr_scr()
@@ -31,7 +31,7 @@ void continue_promt()
 	std::cin.get();
 }
 
-Enemy gen_enemy(int *round, int *difficulty)
+Enemy gen_enemy(int* round, int* difficulty)
 {
 	int level = *round + *difficulty;
 	int skillpoints = level;

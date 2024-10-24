@@ -137,28 +137,32 @@ Equipment* Gear::get_gear(GearSlot gear_slot)
 	return gear_object;
 }
 
-		
+
 Characters::Characters()
 {
-	std::string name = "default";
-	int level = 1;
-	int skillpoints = 1;
-	int xp = 10;
-	int capacity = 100;
-	int stamina = 1;
-	int max_health = 10;
-	int current_health = 10;
-	int max_rage = 100;
-	int current_rage = 0;
-	int energy = 100;
-	int strength = 1;
-	int crit_chance = 1;
-	int crit_bonus = 200;
-	int attackpower = 2;
-	int defense = 0;
-	Gear gear = Gear();
-	std::vector<Items*> inventory;
-	std::string abilities[8] = {"Normal Attack", "Hard Attack"};
+	this->name = "default";
+	this->level = 1;
+	this->skillpoints = 1;
+	this->xp = 10;
+	this->capacity = 100;
+	this->stamina = 1;
+	this->max_health = 10;
+	this->current_health = 10;
+	this->max_rage = 100;
+	this->current_rage = 0;
+	this->energy = 100;
+	this->strength = 1;
+	this->crit_chance = 1;
+	this->crit_bonus = 200;
+	this->attackpower = 2;
+	this->defense = 0;
+	this->gear = Gear();
+	this->inventory;
+	this->abilities[0] = "Normal Attack";
+	this->abilities[1] = "Hard Attack";
+	this->update_atp();
+	this->update_max_health();
+	this->update_crit();
 }
 
 Characters::Characters
@@ -409,16 +413,17 @@ void Characters::add_to_inventory(Items* item)
 
 void Characters::print_inventory_names()
 {
-	std::cout << "Inventory: ";
+	std::cout << "Inventory: \n";
 	for (Items* item: this->inventory)
 	{
 		std::cout << item->name;
 	}
+	std::cout << "\n";
 }
 
 void Characters::print_stats()
 {
-	std::cout << "Name: " + this->name + ", Level: " + std::to_string(this->level) + ", XP: " + std::to_string(this->xp) + ", Capacity: " + std::to_string(this->capacity) + ", Attackpower: " + std::to_string(this->attackpower) + ", Health: " + this->get_health_display_str() + ", Energy: " + std::to_string(this->energy) + ", Stamina: " + std::to_string(this->stamina) + ", Strength: " + std::to_string(this->strength) + ", Crit chance: " + std::to_string(this->crit_chance) + "%, Crit damage bonus: " + std::to_string(this->crit_bonus) + "%";
+	std::cout << "Name: " + this->name + ", Level: " + std::to_string(this->level) + ", XP: " + std::to_string(this->xp) + ", Capacity: " + std::to_string(this->capacity) + ", Attackpower: " + std::to_string(this->attackpower) + ", Health: " + this->get_health_display_str() + ", Energy: " + std::to_string(this->energy) + ", Stamina: " + std::to_string(this->stamina) + ", Strength: " + std::to_string(this->strength) + ", Crit chance: " + std::to_string(this->crit_chance) + "%, Crit damage bonus: " + std::to_string(this->crit_bonus) + "%\n";
 }
 
 
@@ -508,6 +513,8 @@ int Enemy::choose_ability()
 
 
 Player::Player(){}
+
+Player::Player(std::string name): Characters() {this->name = name;}
 
 Player::Player
 (

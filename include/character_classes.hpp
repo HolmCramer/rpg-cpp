@@ -179,8 +179,6 @@ class Enemy: public Characters {
 		int strength,
 		int crit_chance
 		);
-	
-	//virtual void abstract();
 
 	void print_name();
 
@@ -191,6 +189,8 @@ class Enemy: public Characters {
 class Player: public Characters {
 	public:
 	Player();
+
+	Player(std::string name);
 
 	Player(
 		std::string name,

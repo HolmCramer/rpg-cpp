@@ -17,6 +17,6 @@ void set_terminal_size();
 
 void continue_promt();
 
-Enemy gen_enemy(int *round, int *difficulty);
+Enemy gen_enemy(int* round, int* difficulty);
 
 #endif //UTILS_HPP
