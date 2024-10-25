@@ -7,6 +7,7 @@
 #include <random>
 #include <cmath>
 #include <algorithm>
+#include <array>
 
 	
 Gear::Gear(){}
@@ -158,8 +159,9 @@ Characters::Characters()
 	this->defense = 0;
 	this->gear = Gear();
 	this->inventory;
-	this->abilities[0] = "Normal Attack";
-	this->abilities[1] = "Hard Attack";
+	//this->abilities = {};
+	this->abilities.push_back("Normal Attack");
+	this->abilities.push_back("Hard Attack");
 	this->update_atp();
 	this->update_max_health();
 	this->update_crit();
@@ -235,8 +237,8 @@ Characters::Characters
 	this->defense = 0;
 	this->gear = Gear();
 	this->inventory;
-	this->abilities[0] = "Normal Attack";
-	this->abilities[1] = "Hard Attack";
+	this->abilities.push_back("Normal Attack");
+	this->abilities.push_back("Hard Attack");
 	this->update_atp();
 	this->update_max_health();
 	this->update_crit();
@@ -403,7 +405,7 @@ void Characters::modify_current_rage(int rage)
 
 void Characters::print_equipment()
 {
-	for (int i; i < static_cast<int>(GearSlot::GEAR_SLOT_COUNT); i++)
+	for (int i = 0; i < static_cast<int>(GearSlot::GEAR_SLOT_COUNT); i++)
 	{
 		GearSlot slot = static_cast<GearSlot>(i);
 		if (this->gear.is_equipped(slot))
@@ -507,19 +509,19 @@ void Enemy::print_name()
 
 int Enemy::choose_ability()
 {
-	std::cout << this->name + " is choosing its Ability!";
+	std::cout << this->name + " is choosing its Ability!\n";
 	std::string ability_text = "";
-	for (int i; i < this->abilities->length(); i++) 
+	for (int i = 0; i < this->abilities.size(); i++) 
 	{
-		ability_text += "\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n"; 
+		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n");
 	}
 	std::cout << ability_text;
 	std::random_device rd;
 	std::mt19937 engine(rd());
-	std::uniform_int_distribution<int> dist(0, this->abilities->length());
+	std::uniform_int_distribution<int> dist(0, this->abilities.size());
 	int attack_roll = dist(engine);
 	std::cout << std::to_string(attack_roll + 1);
-	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll] + " is used!";
+	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll] + " is used!\n";
 	return attack_roll;
 }
 
@@ -572,6 +574,14 @@ void Player::print_name()
 	std::cout << name << "\n";
 }
 
+void Player::prompt_set_player_name()
+{
+	std::string name;
+	std::cout << "Enter your nickname: ";
+	std::cin >> name;
+	this->name = name;
+}
+
 void Player::skill_up()
 {
 	int player_input;
@@ -611,12 +621,11 @@ int Player::choose_ability()
 {
 	std::cout << "How do you want to attack?\n";
 	std::string ability_text = "";
-	std::vector<int> options;
-	options.reserve(4);
-	for (int i; i < this->abilities->length(); i++)
+	std::array<int,6> options;
+	for (int i = 0; i < this->abilities.size(); i++)
 	{
 		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n");
-		options.push_back(i+1);
+		options[i] = i+1;
 	}
 	int attack;
 	while (true)
@@ -629,9 +638,9 @@ int Player::choose_ability()
 		}
 		else 
 		{
-			std::cout << "Enter a valid number!";
+			std::cout << "Enter a valid number!\n";
 		}
 	}
-	std::cout << std::to_string(attack) << " - " << this->abilities[attack-1] << " is used!";
+	std::cout << std::to_string(attack) << " - " << this->abilities[attack-1] << " is used!\n";
 	return attack;
 }

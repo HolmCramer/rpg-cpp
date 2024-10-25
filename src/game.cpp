@@ -10,16 +10,17 @@ int damage_calc(Characters* attacker, Characters* defender) {
 	std::uniform_int_distribution<int> dist(1, 100);
 	int roll = dist(engine);
 	bool crit_flag = roll <= attacker->crit_chance ? true : false;
-	float damage = crit_flag == true ? attacker->attackpower * attacker->crit_bonus / 100 : attacker->attackpower;
-	damage = damage > defender->defense ? std::round(damage-defender->defense) : 1;
+	float raw_damage = crit_flag == true ? attacker->attackpower * attacker->crit_bonus / 100 : attacker->attackpower;
+	raw_damage = raw_damage > defender->defense ? std::round(raw_damage-defender->defense) : 1;
+	int damage = raw_damage;
 	defender->update_current_health(-damage);
 	if (crit_flag)
 	{
-		std::cout << attacker->name + " dealt *" + std::to_string(damage) + "* !CRITICAL DAMAGE! to " + defender->name + "bringing his HP down to " + defender->get_health_display_str();
+		std::cout << attacker->name + " dealt *" + std::to_string(damage) + "* !CRITICAL DAMAGE! to " + defender->name + " bringing his HP down to " + defender->get_health_display_str() << "\n";
 	}
 	else
 	{
-		std::cout << attacker->name + " dealt (" + std::to_string(damage) + ") Damage to " + defender->name + "bringing his HP down to " + defender->get_health_display_str(); 
+		std::cout << attacker->name + " dealt (" + std::to_string(damage) + ") Damage to " + defender->name + " bringing his HP down to " + defender->get_health_display_str() << "\n"; 
 	}
 	return EXIT_SUCCESS;
 }
@@ -142,10 +143,10 @@ int rest_option(Player* player, bool* rest_flag)
 
 int route_screen
 (
-	int *round,
-	int *difficulty,
-	bool *rest_flag,
-	Player *player
+	int* round,
+	int* difficulty,
+	bool* rest_flag,
+	Player* player
 )
 {
 	if (*round == 1)
@@ -188,27 +189,42 @@ int loot_level_screen(Player* player)
 }
 
 int run() {
-	Player player = Player("holmo");
-	Enemy enemy;
-	int difficulty = 0;
+	Player player;
 	int round = 1;
 	bool rest_flag = false;
-	while(true)
+	int difficulty = 0;
+	bool alive_flag = true;
+	Enemy enemy;
+	char input;
+
+	player.prompt_set_player_name();
+
+	while (true)
 	{
 		clr_scr();
-		story_screen(&round);
+		// story_screen(&round);
 		status_screen(&round, &player);
-		route_screen(&round , &difficulty , &rest_flag, &player);
-		enemy = gen_enemy(&round, &difficulty);
-		combat_screen(&round, &difficulty, &player, &enemy);
-		loot_level_screen(&player);
-		player.print_name();
-		enemy.print_name();
-		std::cin.get();
-		break;
+		route_screen(&round, &difficulty, &rest_flag, &player);
+		if (rest_flag == false)
+		{
+			enemy = gen_enemy(&round, &difficulty);
+			combat_screen(&round, &difficulty, &player, &enemy);
+			if (alive_flag == false)
+			{
+				std::cout << "You lost!\n";
+				break;
+			}
+			loot_level_screen(&player);
+		}
+		round++;
+		std::cout << "gameloop_input, press q to quit or enter to continue\n";
+		std::cin.get(input);
+
+		if (input == 'q')
+		{
+			break;
+		}
+
 	}
-
-	std::cout << player.get_health_display_str();
-
-	return 0;
+	return EXIT_SUCCESS;
 }

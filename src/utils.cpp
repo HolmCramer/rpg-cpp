@@ -8,9 +8,9 @@
 void print_screen_seperator()
 {
 	std::string seperator = "-";
-	for (int i; i < 115; i++)
+	for (int i = 0; i < 115; i++)
 	{
-		seperator += "-";
+		seperator.append("-");
 	}
 	std::cout << seperator << "\n";
 }
@@ -28,6 +28,7 @@ void set_terminal_size()
 void continue_promt()
 {
 	std::cout << "Press any key to continue: ";
+	std::cin.ignore();
 	std::cin.get();
 }
 
