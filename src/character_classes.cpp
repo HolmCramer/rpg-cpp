@@ -159,7 +159,6 @@ Characters::Characters()
 	this->defense = 0;
 	this->gear = Gear();
 	this->inventory;
-	//this->abilities = {};
 	this->abilities.push_back("Normal Attack");
 	this->abilities.push_back("Hard Attack");
 	this->update_atp();
@@ -518,9 +517,9 @@ int Enemy::choose_ability()
 	std::cout << ability_text;
 	std::random_device rd;
 	std::mt19937 engine(rd());
-	std::uniform_int_distribution<int> dist(0, this->abilities.size());
+	std::uniform_int_distribution<int> dist(0, this->abilities.size()-1);
 	int attack_roll = dist(engine);
-	std::cout << std::to_string(attack_roll + 1);
+	std::cout << std::to_string(attack_roll + 1) << "\n";
 	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll] + " is used!\n";
 	return attack_roll;
 }
@@ -585,7 +584,7 @@ void Player::prompt_set_player_name()
 void Player::skill_up()
 {
 	int player_input;
-	while (this->skillpoints > 0) 
+	while (this->skillpoints > 0)
 	{
 		std::cout << "Choose Attribute to level up:\n 1 : Increase current Stamina[" + std::to_string(this->stamina) + "] by 1\n 2 : Increase current Strength[" + std::to_string(this->strength) + "] by 1\n 3 : Increase current Crit chance[" + std::to_string(this->crit_chance) + "%] by 1%\n";
 		std::cin >> player_input;

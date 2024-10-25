@@ -11,8 +11,7 @@ int damage_calc(Characters* attacker, Characters* defender) {
 	int roll = dist(engine);
 	bool crit_flag = roll <= attacker->crit_chance ? true : false;
 	float raw_damage = crit_flag == true ? attacker->attackpower * attacker->crit_bonus / 100 : attacker->attackpower;
-	raw_damage = raw_damage > defender->defense ? std::round(raw_damage-defender->defense) : 1;
-	int damage = raw_damage;
+	int damage = raw_damage > defender->defense ? std::round(raw_damage-defender->defense) : 1;
 	defender->update_current_health(-damage);
 	if (crit_flag)
 	{
@@ -173,11 +172,11 @@ int route_screen
 	}
 }
 
-bool combat_screen(int* round, int* difficulty, Player* player, Enemy* enemy)
+int combat_screen(int* round, int* difficulty, Player* player, Enemy* enemy, bool* alive_flag)
 {
 	print_screen_seperator();
-	bool result = combat(player, enemy);
-	return result;
+	*alive_flag = combat(player, enemy);
+	return EXIT_SUCCESS;
 }
 
 int loot_level_screen(Player* player)
@@ -208,7 +207,7 @@ int run() {
 		if (rest_flag == false)
 		{
 			enemy = gen_enemy(&round, &difficulty);
-			combat_screen(&round, &difficulty, &player, &enemy);
+			combat_screen(&round, &difficulty, &player, &enemy, &alive_flag);
 			if (alive_flag == false)
 			{
 				std::cout << "You lost!\n";
@@ -218,6 +217,7 @@ int run() {
 		}
 		round++;
 		std::cout << "gameloop_input, press q to quit or enter to continue\n";
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cin.get(input);
 
 		if (input == 'q')

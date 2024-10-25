@@ -28,7 +28,7 @@ void set_terminal_size()
 void continue_promt()
 {
 	std::cout << "Press any key to continue: ";
-	std::cin.ignore();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
 }
 
