@@ -27,10 +27,18 @@ void set_terminal_size()
 
 void continue_promt()
 {
-	std::cout << "Press any key to continue: " << std::flush;
-	std::cin.clear();
-	std::cin.sync();
-	std::cin.get();
+	//std::cin.clear();
+	std::cout << "Press enter to continue: " << std::flush;
+	//std::cin.sync();
+	//std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+	if (std::cin.peek() =='\n')
+	{
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+	}
+	else
+	{
+		std::cin.get();
+	}
 }
 
 Enemy gen_enemy(int* round, int* difficulty)

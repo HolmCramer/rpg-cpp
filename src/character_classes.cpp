@@ -581,6 +581,7 @@ void Player::prompt_set_player_name()
 {
 	std::cout << "Enter your nickname: ";
 	std::getline(std::cin, this->name);
+	std::cin.sync();
 }
 
 void Player::skill_up()
@@ -590,6 +591,7 @@ void Player::skill_up()
 	{
 		std::cout << "Choose Attribute to level up:\n 1 : Increase current Stamina[" + std::to_string(this->stamina) + "] by 1\n 2 : Increase current Strength[" + std::to_string(this->strength) + "] by 1\n 3 : Increase current Crit chance[" + std::to_string(this->crit_chance) + "%] by 1%" << std::endl;
 		std::cin >> player_input;
+		std::cin.sync();
 		switch (player_input)
 		{
 			case 1:
@@ -634,6 +636,7 @@ int Player::choose_ability()
 	{
 		std::cout << ability_text;
 		std::cin.get(input);
+		std::cin.sync();
 		attack = char_to_int(input);
 		if (std::find(options.begin(), options.end(), attack) != options.end())
 		{
