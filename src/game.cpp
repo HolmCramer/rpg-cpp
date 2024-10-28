@@ -15,11 +15,11 @@ int damage_calc(Characters* attacker, Characters* defender) {
 	defender->update_current_health(-damage);
 	if (crit_flag)
 	{
-		std::cout << attacker->name + " dealt *" + std::to_string(damage) + "* !CRITICAL DAMAGE! to " + defender->name + " bringing his HP down to " + defender->get_health_display_str() << "\n";
+		std::cout << attacker->name + " dealt *" + std::to_string(damage) + "* !CRITICAL DAMAGE! to " + defender->name + " bringing his HP down to " + defender->get_health_display_str() << std::endl;
 	}
 	else
 	{
-		std::cout << attacker->name + " dealt (" + std::to_string(damage) + ") Damage to " + defender->name + " bringing his HP down to " + defender->get_health_display_str() << "\n"; 
+		std::cout << attacker->name + " dealt (" + std::to_string(damage) + ") Damage to " + defender->name + " bringing his HP down to " + defender->get_health_display_str() << std::endl;
 	}
 	return EXIT_SUCCESS;
 }
@@ -39,7 +39,7 @@ bool combat(Player* player, Enemy* enemy)
 		{
 			player->add_xp(enemy->get_xp());
 			result = true;
-			std::cout << "You defeated " << enemy->name << "!\n";
+			std::cout << "You defeated " << enemy->name << "!" << std::endl;
 			break;
 		}
 		print_screen_seperator();
@@ -50,7 +50,7 @@ bool combat(Player* player, Enemy* enemy)
 		if (player->get_current_health() <= 0)
 		{
 			result = false;
-			std::cout << "You were defeated by " << enemy->name << "!\n";
+			std::cout << "You were defeated by " << enemy->name << "!" << std::endl;
 			break;
 		}
 		print_screen_seperator();
@@ -61,7 +61,7 @@ bool combat(Player* player, Enemy* enemy)
 int story_screen(int* round)
 {
 	print_screen_seperator();
-	std::cout << "It's round " << std::to_string(*round) << ", story will be added!\n";
+	std::cout << "It's round " << std::to_string(*round) << ", story will be added!" << std::endl;
 	continue_promt();
 	return EXIT_SUCCESS;
 }
@@ -84,8 +84,8 @@ int difficulty_option(int* difficulty)
 	int number = 'n';
 	char input;
 	Difficulty option;
-	std::cout << "The current difficulty level is at " << std::to_string(*difficulty) << "\n";
-	std::cout << "Choose the difficulty level for the next round:\n + : increase the difficulty level\n - : lower the difficulty level\n Enter : remain at current level\n";
+	std::cout << "The current difficulty level is at " << std::to_string(*difficulty) << std::endl;
+	std::cout << "Choose the difficulty level for the next round:\n\t+\t: increase the difficulty level\n\t-\t: lower the difficulty level\n\tEnter\t: remain at current level" << std::endl;
 	while (true)
 	{
 		std::cin.ignore();
@@ -93,49 +93,51 @@ int difficulty_option(int* difficulty)
 		if (input == '+')
 		{
 			*difficulty += 1;
-			std::cout << "You raised the difficulty level to " << std::to_string(*difficulty) << "\n";
+			std::cout << "You raised the difficulty level to " << std::to_string(*difficulty) << std::endl;
 			return EXIT_SUCCESS;
 		}
 		else if (input == '-')
 		{
 			*difficulty -= 1;
-			std::cout << "You lowered the difficulty level to " << std::to_string(*difficulty) << "\n";
+			std::cout << "You lowered the difficulty level to " << std::to_string(*difficulty) << std::endl;
 			return EXIT_SUCCESS;
 		}
 		else if (input == '\n')
 		{
-			std::cout << "You remain at the difficulty level of " << std::to_string(*difficulty) << "\n";
+			std::cout << "You remain at the difficulty level of " << std::to_string(*difficulty) << std::endl;
             return EXIT_SUCCESS;
 		}
 		else
 		{
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Enter a valid option!\n";
+			std::cout << "Enter a valid option!" << std::endl;
 		}
 	}
 }
 
 int rest_option(Player* player, bool* rest_flag)
 {
-	std::string input;
+	char input;
 	while (true)
 	{
-		std::cout << "Do you want to rest and heal to full health?(y/n)\n";
-		std::cin >> input;
-		if (input == "y")
+		std::cout << "Do you want to rest and heal to full health?(y/n): " << std::flush;
+		std::cin.clear();
+		std::cin.sync();
+		std::cin.get(input);
+		if (input == 'y')
 		{
 			player->set_current_health_to_max_health();
 			*rest_flag = true;
 			return EXIT_SUCCESS;
 		}
-		else if (input == "n")
+		else if (input == 'n')
 		{
 			*rest_flag = false;
 			return EXIT_SUCCESS;
 		}
 		else
 		{
-			std::cout << "Enter a valid input!\n";
+			std::cout << "Enter a valid input: ";
 		}
 	}
 }
@@ -210,14 +212,15 @@ int run() {
 			combat_screen(&round, &difficulty, &player, &enemy, &alive_flag);
 			if (alive_flag == false)
 			{
-				std::cout << "You lost!\n";
+				std::cout << "You lost!" << std::endl;
 				break;
 			}
 			loot_level_screen(&player);
 		}
 		round++;
-		std::cout << "gameloop_input, press q to quit or enter to continue\n";
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "gameloop_input, press q to quit or enter to continue: " << std::flush;
+		std::cin.clear();
+		std::cin.sync();
 		std::cin.get(input);
 
 		if (input == 'q')

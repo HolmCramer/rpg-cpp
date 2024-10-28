@@ -19,4 +19,6 @@ void continue_promt();
 
 Enemy gen_enemy(int* round, int* difficulty);
 
+int char_to_int(char c);
+
 #endif //UTILS_HPP
