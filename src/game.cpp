@@ -34,7 +34,6 @@ bool combat(Player* player, Enemy* enemy)
 		enemy->print_stats();
 		ability = player->choose_ability();
 		damage_calc(player, enemy);
-		continue_promt();
 		if (enemy->get_current_health() <= 0)
 		{
 			player->add_xp(enemy->get_xp());
@@ -42,17 +41,18 @@ bool combat(Player* player, Enemy* enemy)
 			std::cout << "You defeated " << enemy->name << "!" << std::endl;
 			break;
 		}
+		continue_promt();
 		print_screen_seperator();
 		enemy->print_stats();
 		enemy->choose_ability();
 		damage_calc(enemy, player);
-		continue_promt();
 		if (player->get_current_health() <= 0)
 		{
 			result = false;
 			std::cout << "You were defeated by " << enemy->name << "!" << std::endl;
 			break;
 		}
+		continue_promt();
 		print_screen_seperator();
 	}
 	return result;
@@ -86,8 +86,11 @@ int difficulty_option(int* difficulty)
 	std::cout << "Choose the difficulty level for the next round:\n\t+\t: increase the difficulty level\n\t-\t: lower the difficulty level\n\tEnter\t: remain at current level" << std::endl;
 	while (true)
 	{
-		//std::cin.get(input);
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n') >> input;
+		
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.get(input);
+		std::cin.ignore();
 		if (input == '+')
 		{
 			difficulty++;
@@ -107,7 +110,7 @@ int difficulty_option(int* difficulty)
 		}
 		else
 		{
-			std::cout << "Enter a valid option! ";
+			std::cout << "Enter a valid option: ";
 		}
 	}
 }
@@ -115,12 +118,12 @@ int difficulty_option(int* difficulty)
 int rest_option(Player* player, bool* rest_flag)
 {
 	char input;
+	std::cout << "Do you want to rest and heal to full health?(y/n): " << std::flush;
 	while (true)
 	{
-		std::cout << "Do you want to rest and heal to full health?(y/n): " << std::flush;
-		std::cin.clear();
-		std::cin.sync();
+		std::cout << std::cin.peek();
 		std::cin.get(input);
+		std::cin.ignore();
 		if (input == 'y')
 		{
 			player->set_current_health_to_max_health();
@@ -135,6 +138,8 @@ int rest_option(Player* player, bool* rest_flag)
 		else
 		{
 			std::cout << "Enter a valid input: ";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	}
 }
@@ -175,6 +180,7 @@ int combat_screen(int* round, int* difficulty, Player* player, Enemy* enemy, boo
 {
 	print_screen_seperator();
 	*alive_flag = combat(player, enemy);
+	continue_promt();
 	return EXIT_SUCCESS;
 }
 
@@ -216,8 +222,6 @@ int run() {
 		}
 		round++;
 		std::cout << "gameloop_input, press q to quit or enter to continue: " << std::flush;
-		std::cin.clear();
-		std::cin.sync();
 		std::cin.get(input);
 
 		if (input == 'q')

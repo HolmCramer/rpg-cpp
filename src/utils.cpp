@@ -28,15 +28,7 @@ void set_terminal_size()
 void continue_promt()
 {
 	std::cout << "Press enter to continue: " << std::flush;
-	// //std::cin.sync();
-	// std::cin.clear();
-	// //std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-	// std::cin.ignore(INT_MAX);
-
-	//std::cin.getline(temp, STRLEN);
-	std::cin.clear();
 	std::cin.get();
-	//std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 Enemy gen_enemy(int* round, int* difficulty)
@@ -86,13 +78,13 @@ int char_to_int(char c)
         case '0': return 0;
         case '1': return 1;
         case '2': return 2;
-		case '3': return 3;
-		case '4': return 4;
-		case '5': return 5;
-		case '6': return 6;
-		case '7': return 7;
-		case '8': return 8;
+	case '3': return 3;
+	case '4': return 4;
+	case '5': return 5;
+	case '6': return 6;
+	case '7': return 7;
+	case '8': return 8;
         case '9': return 9;
         default: return -1;
-    }
+	}
 }
