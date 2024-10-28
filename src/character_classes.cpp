@@ -580,8 +580,9 @@ void Player::print_name()
 void Player::prompt_set_player_name()
 {
 	std::cout << "Enter your nickname: ";
-	std::getline(std::cin, this->name);
-	std::cin.sync();
+	std::cin >> this->name;
+	// std::getline(std::cin, this->name);
+	// std::cin.sync();
 }
 
 void Player::skill_up()
