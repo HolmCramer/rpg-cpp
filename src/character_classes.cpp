@@ -581,7 +581,7 @@ void Player::prompt_set_player_name()
 {
 	std::cout << "Enter your nickname: ";
 	std::cin >> this->name;
-	std::cin.ignore();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void Player::skill_up()
