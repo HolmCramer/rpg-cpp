@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <array>
 #include "../include/utils.hpp"
+#include <limits>
 
 
 Gear::Gear(){}
@@ -586,14 +587,15 @@ void Player::prompt_set_player_name()
 
 void Player::skill_up()
 {
-	int player_input;
+	int input;
+	std::cout << "Choose Attribute to level up:\n\t1 : Increase current Stamina[" + std::to_string(this->stamina) + "] by 1\n\t2 : Increase current Strength[" + std::to_string(this->strength) + "] by 1\n\t3 : Increase current Crit chance[" + std::to_string(this->crit_chance) + "%] by 1%" << std::endl << ">>> ";
 	while (this->skillpoints > 0)
 	{
-		std::cout << "Choose Attribute to level up:\n 1 : Increase current Stamina[" + std::to_string(this->stamina) + "] by 1\n 2 : Increase current Strength[" + std::to_string(this->strength) + "] by 1\n 3 : Increase current Crit chance[" + std::to_string(this->crit_chance) + "%] by 1%" << std::endl;
-		std::cin >> player_input;
-		std::cin.ignore();
-		switch (player_input)
-		{
+		if (std::cin >> input)
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            switch (input)
+			{
 			case 1:
 				this->increment_stamina();
 				this->update_max_health();
@@ -614,9 +616,16 @@ void Player::skill_up()
 				std::cout << "You increased your Crit chance to " << std::to_string(this->crit_chance) << "%" << " and " << std::to_string(this->crit_bonus) << "%" << " Crit damage bonus" << std::endl;
 				break;
 			default:
-				std::cout << "Enter a valid number!" << std::endl;
+				std::cout << "Enter a valid number!\n>>> ";
 				break;
-		}
+			}
+        }
+        else
+        {		
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Enter a valid number!\n>>> ";
+        }
 	}
 }
 
