@@ -524,7 +524,7 @@ int Enemy::choose_ability()
 	std::mt19937 engine(rd());
 	std::uniform_int_distribution<int> dist(0, this->abilities.size()-1);
 	int attack_roll = dist(engine);
-	std::cout << std::to_string(attack_roll + 1) << std::endl;
+	std::cout << ">>> " << std::to_string(attack_roll + 1) << std::endl;
 	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll] + " is used!" << std::endl;
 	return attack_roll;
 }
@@ -580,7 +580,7 @@ void Player::print_name()
 
 void Player::prompt_set_player_name()
 {
-	std::cout << "Enter your nickname: ";
+	std::cout << "Enter your nickname:\n>>> ";
 	std::cin >> this->name;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
@@ -631,31 +631,37 @@ void Player::skill_up()
 
 int Player::choose_ability()
 {
-	std::cout << "How do you want to attack?" << std::endl;
-	std::string ability_text = "";
+    std::cout << "How do you want to attack?" << std::endl;
+	std::string ability_text;
 	std::array<int,6> options;
 	for (int i = 0; i < this->abilities.size(); i++)
 	{
 		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n");
 		options[i] = i+1;
 	}
-	char input;
-	int attack;
+    std::cout << ability_text;
+    std::cout << ">>> ";
+	int ability;
 	while (true)
 	{
-		std::cout << ability_text;
-		std::cin.get(input);
-		std::cin.ignore();
-		attack = char_to_int(input);
-		if (std::find(options.begin(), options.end(), attack) != options.end())
-		{
-			break;
-		}
-		else 
-		{
-			std::cout << "Enter a valid number!" << std::endl;
-		}
+        if (std::cin >> ability)
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            if (std::find(options.begin(), options.end(), ability) != options.end())
+            {
+                std::cout << std::to_string(ability) << " - " << this->abilities[ability-1] << " is used!" << std::endl;
+                return ability;
+            }
+            else
+            {
+                std::cout << "Enter a valid number!\n>>> ";
+            }
+        }
+        else
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Enter a valid number!\n>>> ";
+        }
 	}
-	std::cout << std::to_string(attack) << " - " << this->abilities[attack-1] << " is used!" << std::endl;
-	return attack;
 }
