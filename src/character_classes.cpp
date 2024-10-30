@@ -442,7 +442,13 @@ void Characters::print_inventory_names()
 
 void Characters::print_stats()
 {
-	std::cout << "Name: " + this->name + ", Level: " + std::to_string(this->level) + ", XP: " + std::to_string(this->xp) + ", Capacity: " + std::to_string(this->capacity) + ", Attackpower: " + std::to_string(this->attackpower) + ", Health: " + this->get_health_display_str() + ", Energy: " + std::to_string(this->energy) + ", Stamina: " + std::to_string(this->stamina) + ", Strength: " + std::to_string(this->strength) + ", Crit chance: " + std::to_string(this->crit_chance) + "%, Crit damage bonus: " + std::to_string(this->crit_bonus) + "%" << std::endl;
+	std::cout << "Name: " << this->name + ", Level: " << std::to_string(this->level)
+	<< ", XP: " << std::to_string(this->xp) << ", Capacity: " << std::to_string(this->capacity)
+	<< ", Attackpower: " << std::to_string(this->attackpower) << ", Health: "
+	<< this->get_health_display_str() << ", Energy: " << std::to_string(this->energy)
+	<< ", Stamina: " << std::to_string(this->stamina) << ", Strength: " << std::to_string(this->strength)
+	<< ", Crit chance: " << std::to_string(this->crit_chance) << "%, Crit damage bonus: "
+	<< std::to_string(this->crit_bonus) << "%" << std::endl;
 }
 
 
@@ -492,6 +498,7 @@ Enemy::Enemy
 	int level,
 	int skillpoints,
 	int xp,
+	int capacity,
 	int stamina,
 	int strength,
 	int crit_chance
@@ -504,7 +511,7 @@ Enemy::Enemy
 	stamina,
 	strength,
 	crit_chance
-) {}
+) {this->capacity = capacity;}
 
 void Enemy::print_name()
 {

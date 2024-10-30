@@ -91,13 +91,13 @@ int difficulty_option(int* difficulty)
 		{
 			if (input.length() == 1 && input[0] == '+')
 			{
-				difficulty++;
+				*difficulty += 1;
 				std::cout << "You raised the difficulty level to " << std::to_string(*difficulty) << std::endl;
 				return EXIT_SUCCESS;
 			}
 			else if (input.length() == 1 && input[0] == '-')
 			{
-				difficulty--;
+				*difficulty -= 1;
 				std::cout << "You lowered the difficulty level to " << std::to_string(*difficulty) << std::endl;
 				return EXIT_SUCCESS;
 			}
@@ -181,7 +181,7 @@ int route_screen
 		rest_option(player, rest_flag);
 		if (*rest_flag == false)
 		{
-			*difficulty = difficulty_option(difficulty);
+			difficulty_option(difficulty);
 		}
 		return EXIT_SUCCESS;
 	}

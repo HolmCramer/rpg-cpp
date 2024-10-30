@@ -47,7 +47,6 @@ Enemy gen_enemy(int* round, int* difficulty)
 	std::uniform_int_distribution<int> dist(0, 2);
 	int roll;
 	dist(engine);
-
 	while (skillpoints > 0)
 	{
 		switch (roll = dist(engine))
@@ -68,24 +67,6 @@ Enemy gen_enemy(int* round, int* difficulty)
 				std::cout << "error assigning mob skillpoints" << std::endl;
 		}
 	}
-	Enemy enemy = Enemy("Enemy", level, skillpoints, xp, stamina, strength, crit_chance);
+	Enemy enemy = Enemy("Enemy", level, skillpoints, xp, capacity, stamina, strength, crit_chance);
 	return enemy;
-}
-
-int char_to_int(char c)
-{
-    switch (c)
-	{
-        case '0': return 0;
-        case '1': return 1;
-        case '2': return 2;
-		case '3': return 3;
-		case '4': return 4;
-		case '5': return 5;
-		case '6': return 6;
-		case '7': return 7;
-		case '8': return 8;
-        case '9': return 9;
-        default: return -1;
-	}
 }

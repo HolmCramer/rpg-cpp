@@ -174,6 +174,7 @@ class Enemy: public Characters {
 		int level,
 		int skillpoints,
 		int xp,
+		int capacity,
 		int stamina,
 		int strength,
 		int crit_chance
