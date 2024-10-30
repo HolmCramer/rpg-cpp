@@ -28,7 +28,8 @@ void set_terminal_size()
 void continue_promt()
 {
 	std::cout << "Press enter to continue: " << std::flush;
-	std::cin.get();
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 Enemy gen_enemy(int* round, int* difficulty)

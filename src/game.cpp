@@ -199,18 +199,53 @@ int loot_level_screen(Player* player)
 	return EXIT_SUCCESS;
 }
 
+bool quit_or_continue(bool* run)
+{
+	std::string input;
+	while (true)
+		{
+			getline(std::cin, input);
+			if (std::cin.good())
+			{
+				std::cout << "in if" << std::endl;
+				if (input.length() == 1 && input[0] == 'q')
+				{
+					std::cout << "You quit the game!" << std::endl;
+					*run = false;
+					return EXIT_SUCCESS;
+				}
+				else if (input.length() == 0)
+				{
+					return EXIT_SUCCESS;
+				}
+				else
+				{
+					std::cout << "Press q to quit or enter to continue!\n>>> " << std::flush;
+					input = "";
+				}
+
+			}
+			else
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout << "Enter q or press enter!:\n>>> ";
+			}
+		}
+}
+
 int run() {
+	bool run = true;
 	Player player;
 	int round = 1;
 	bool rest_flag = false;
 	int difficulty = 0;
 	bool alive_flag = true;
 	Enemy enemy;
-	char input;
 
 	player.prompt_set_player_name();
 
-	while (true)
+	while (run)
 	{
 		// clr_scr();
 		// story_screen(&round);
@@ -231,31 +266,7 @@ int run() {
 		
 		std::cout << "gameloop_input, press q to quit or enter to continue:\n>>> " << std::flush;
 		
-		while (true)
-		{
-			std::cout << std::cin.rdstate() << std::endl;
-			std::cin.get(input);
-			if (std::cin.good())
-			{
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				if (input == 'q')
-				{
-					std::cout << "You quit the game!" << std::endl;
-					return EXIT_SUCCESS;
-				}
-				if (input == '\n')
-				{
-					break;
-				}
-				input = 'a';
-			}
-			else
-			{
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout << "Enter q or press enter!:\n>>> ";
-			}
-		}
+		quit_or_continue(&run);
 	}
 	return EXIT_SUCCESS;
 }

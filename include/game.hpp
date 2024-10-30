@@ -15,22 +15,24 @@ int difficulty_option(int* difficulty);
 
 int rest_option(Player* player, bool* rest_flag);
 
-int route_screen
-(
+int route_screen(
     int* round,
     int* difficulty,
     bool* rest_flag,
     Player* player
 );
 
-bool combat_screen
-(
+int combat_screen(
     int* round,
     int* difficulty,
-    Player* player
+    Player* player,
+    Enemy* enemy,
+    bool* alive_flag
 );
 
 int loot_level_screen(Player* player);
+
+bool quit_or_continue(bool* run);
 
 int run();
 
