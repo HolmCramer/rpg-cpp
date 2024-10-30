@@ -81,36 +81,41 @@ int status_screen(int* round, Player* player)
 
 int difficulty_option(int* difficulty)
 {
-	char input;
+	std::string input;
 	std::cout << "The current difficulty level is at " << std::to_string(*difficulty) << std::endl;
-	std::cout << "Choose the difficulty level for the next round:\n\t+\t: increase the difficulty level\n\t-\t: lower the difficulty level\n\tEnter\t: remain at current level" << std::endl;
+	std::cout << "Choose the difficulty level for the next round:\n\t+\t: increase the difficulty level\n\t-\t: lower the difficulty level\n\tEnter\t: remain at current level\n>>> " << std::flush;
 	while (true)
 	{
-		
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cin.get(input);
-		std::cin.ignore();
-		if (input == '+')
+		getline(std::cin, input);
+		if (std::cin.good())
 		{
-			difficulty++;
-			std::cout << "You raised the difficulty level to " << std::to_string(*difficulty) << std::endl;
-			return EXIT_SUCCESS;
-		}
-		else if (input == '-')
-		{
-			difficulty--;
-			std::cout << "You lowered the difficulty level to " << std::to_string(*difficulty) << std::endl;
-			return EXIT_SUCCESS;
-		}
-		else if (input == '\n')
-		{
-			std::cout << "You remain at the difficulty level of " << std::to_string(*difficulty) << std::endl;
-			return EXIT_SUCCESS;
+			if (input.length() == 1 && input[0] == '+')
+			{
+				difficulty++;
+				std::cout << "You raised the difficulty level to " << std::to_string(*difficulty) << std::endl;
+				return EXIT_SUCCESS;
+			}
+			else if (input.length() == 1 && input[0] == '-')
+			{
+				difficulty--;
+				std::cout << "You lowered the difficulty level to " << std::to_string(*difficulty) << std::endl;
+				return EXIT_SUCCESS;
+			}
+			else if (input.length() == 0)
+			{
+				std::cout << "You remain at the difficulty level of " << std::to_string(*difficulty) << std::endl;
+				return EXIT_SUCCESS;
+			}
+			else
+			{
+				std::cout << "Enter a valid option:\n>>> " << std::flush;
+			}
 		}
 		else
 		{
-			std::cout << "Enter a valid option: ";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Enter a valid option:\n>>> " << std::flush;
 		}
 	}
 }
