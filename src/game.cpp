@@ -117,38 +117,37 @@ int difficulty_option(int* difficulty)
 
 int rest_option(Player* player, bool* rest_flag)
 {
-	char input;
+	std::string input;
 	std::cout << "Do you want to rest and heal to full health?(y/n):\n>>> " << std::flush;
 	while (true)
 	{
-		if (std::cin >> input)
-        {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            if (input == 'y')
-            {
-                player->set_current_health_to_max_health();
+		
+		getline(std::cin, input);
+		if (std::cin.good())
+		{
+			if (input.length() == 1 && input[0] == 'y')
+			{
+				player->set_current_health_to_max_health();
                 *rest_flag = true;
                 return EXIT_SUCCESS;
-            }
-            else if (input == 'n')
-            {
-                *rest_flag = false;
+			}
+			else if (input.length() == 1 && input[0] == 'n')
+			{
+				*rest_flag = false;
                 return EXIT_SUCCESS;
-            }
-			// else
-			// {
-			// 	std::cin.clear();
-			// 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			// 	std::cout << "Enter either y or n!\n>>> ";
-			// }
-        }
-        else
-        {		
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Enter either y or n!\n>>> ";
-        }
-    }
+			}
+			else
+			{
+				std::cout << "Enter either y or n!\n>>> " << std::flush;
+			}
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Enter either y or n!\n>>> " << std::flush;
+		}
+	}
 }
 
 int route_screen
@@ -203,35 +202,32 @@ bool quit_or_continue(bool* run)
 {
 	std::string input;
 	while (true)
+	{
+		getline(std::cin, input);
+		if (std::cin.good())
 		{
-			getline(std::cin, input);
-			if (std::cin.good())
+			if (input.length() == 1 && input[0] == 'q')
 			{
-				std::cout << "in if" << std::endl;
-				if (input.length() == 1 && input[0] == 'q')
-				{
-					std::cout << "You quit the game!" << std::endl;
-					*run = false;
-					return EXIT_SUCCESS;
-				}
-				else if (input.length() == 0)
-				{
-					return EXIT_SUCCESS;
-				}
-				else
-				{
-					std::cout << "Press q to quit or enter to continue!\n>>> " << std::flush;
-					input = "";
-				}
-
+				std::cout << "You quit the game!" << std::endl;
+				*run = false;
+				return EXIT_SUCCESS;
+			}
+			else if (input.length() == 0)
+			{
+				return EXIT_SUCCESS;
 			}
 			else
 			{
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout << "Enter q or press enter!:\n>>> ";
+				std::cout << "Press q to quit or enter to continue!\n>>> " << std::flush;
 			}
 		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Enter q or press enter!:\n>>> " << std::flush;
+		}
+	}
 }
 
 int run() {
