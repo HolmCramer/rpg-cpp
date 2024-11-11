@@ -1,6 +1,5 @@
 #pragma once
-#ifndef GAME_HPP
-#define GAME_HPP
+
 #include "character_classes.hpp"
 
 int damage_calc(Characters* attacker, Characters* defender);
@@ -35,5 +34,3 @@ int loot_level_screen(Player* player);
 bool quit_or_continue(bool* run);
 
 int run();
-
-#endif //GAME_HPP

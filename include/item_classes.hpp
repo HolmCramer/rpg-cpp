@@ -1,6 +1,5 @@
 #pragma once
-#ifndef ITEM_CLASSES_HPP
-#define ITEM_CLASSES_HPP
+
 #include <string>
 
 enum ArmorType
@@ -138,5 +137,3 @@ class Weapon: public Equipment
 
 	virtual ~Weapon();
 };
-
-#endif //ITEM_CLASSES_HPP
