@@ -7,11 +7,11 @@ Ability::Ability(
     int resource_cost,
     int resource_generation_amount,
     int base_damage,
-    float damage_multplier)
+    float damage_multiplier)
     {
     this->name = name;
     this->resource_cost = resource_cost;
     this->resource_generation_amount= resource_generation_amount;
     this->base_damage = base_damage;
-    this->damage_multplier = damage_multplier;
+    this->damage_multiplier = damage_multiplier;
     }

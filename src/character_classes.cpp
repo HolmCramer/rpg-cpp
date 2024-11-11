@@ -161,11 +161,10 @@ Characters::Characters()
 	this->defense = 0;
 	this->gear = Gear();
 	this->inventory;
-	this->abilities.push_back("Normal Attack");
-	this->abilities.push_back("Hard Attack");
 	this->update_atp();
 	this->update_max_health();
 	this->update_crit();
+	this->add_basic_abilities();
 }
 
 Characters::Characters
@@ -207,6 +206,7 @@ Characters::Characters
 	this->update_atp();
 	this->update_max_health();
 	this->update_crit();
+	this->add_basic_abilities();
 }
 
 Characters::Characters
@@ -238,11 +238,10 @@ Characters::Characters
 	this->defense = 0;
 	this->gear = Gear();
 	this->inventory;
-	this->abilities.push_back("Normal Attack");
-	this->abilities.push_back("Hard Attack");
 	this->update_atp();
 	this->update_max_health();
 	this->update_crit();
+	this->add_basic_abilities();
 }
 
 void Characters::print_name()
@@ -416,6 +415,14 @@ void Characters::print_equipment()
 	}
 }
 
+void Characters::add_basic_abilities()
+{
+	Ability normal_attack = Ability("[Normal Attack]", 0, 20, 0, 1);
+	Ability heavy_attack = Ability("[Heavy Attack]", 30, 0, 5, 1.2);
+	this->abilities.push_back(normal_attack);
+	this->abilities.push_back(heavy_attack);
+}
+
 std::vector<Items*> Characters::get_inventory()
 {
 	return this->inventory;
@@ -524,7 +531,7 @@ int Enemy::choose_ability()
 	std::string ability_text = "";
 	for (int i = 0; i < this->abilities.size(); i++) 
 	{
-		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n");
+		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i].name + "\n");
 	}
 	std::cout << ability_text;
 	std::random_device rd;
@@ -532,7 +539,7 @@ int Enemy::choose_ability()
 	std::uniform_int_distribution<int> dist(0, this->abilities.size()-1);
 	int attack_roll = dist(engine);
 	std::cout << ">>> " << std::to_string(attack_roll + 1) << std::endl;
-	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll] + " is used!" << std::endl;
+	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll].name + " is used!" << std::endl;
 	return attack_roll;
 }
 
@@ -643,7 +650,7 @@ int Player::choose_ability()
 	std::array<int,6> options;
 	for (int i = 0; i < this->abilities.size(); i++)
 	{
-		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i] + "\n");
+		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i].name + "\n");
 		options[i] = i+1;
 	}
     std::cout << ability_text;
@@ -656,7 +663,7 @@ int Player::choose_ability()
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             if (std::find(options.begin(), options.end(), ability) != options.end())
             {
-                std::cout << std::to_string(ability) << " - " << this->abilities[ability-1] << " is used!" << std::endl;
+                std::cout << std::to_string(ability) << " - " << this->abilities[ability-1].name << " is used!" << std::endl;
                 return ability;
             }
             else

@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include "abilities.hpp"
 
 class Gear {
 	public:
@@ -54,7 +55,7 @@ class Characters {
 	int defense;
 	Gear gear;
 	std::vector<Items*> inventory;
-	std::vector<std::string> abilities;
+	std::vector<Ability> abilities;
 	
 	Characters();
 
@@ -144,6 +145,8 @@ class Characters {
 	void print_inventory_names();
 
 	void print_stats();
+
+	void add_basic_abilities();
 };
 
 class Enemy: public Characters {

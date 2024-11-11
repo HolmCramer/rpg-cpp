@@ -7,7 +7,7 @@ class Ability {
     int resource_cost;
     int resource_generation_amount;
     int base_damage;
-    float damage_multplier;
+    float damage_multiplier;
 
     Ability();
 
@@ -16,5 +16,5 @@ class Ability {
         int resource_cost,
         int resource_generation_amount,
         int base_damage,
-        float damage_multplier);
+        float damage_multiplier);
 };
