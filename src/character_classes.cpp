@@ -711,7 +711,7 @@ int Player::choose_ability()
 			if (std::find(options.begin(), options.end(), chosen_ability) != options.end())
             {
                 std::cout << std::to_string(chosen_ability) << " - " << this->abilities[chosen_ability-1].name << " is used!" << std::endl;
-                return chosen_ability;
+                return chosen_ability-1;
             }
             else
             {

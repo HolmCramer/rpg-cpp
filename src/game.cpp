@@ -5,13 +5,13 @@
 #include <cmath>
 #include "abilities.hpp"
 
-int damage_calc(Characters* attacker, Characters* defender) {
+int damage_calc(Characters* attacker, Characters* defender, int chosen_ability) {
 	std::random_device rd;
 	std::mt19937 engine(rd());
 	std::uniform_int_distribution<int> dist(1, 100);
 	int roll = dist(engine);
 	bool crit_flag = roll <= attacker->crit_chance ? true : false;
-	float raw_damage = crit_flag == true ? attacker->attackpower * attacker->crit_bonus / 100 : attacker->attackpower;
+	float raw_damage = crit_flag == true ? attacker->abilities[chosen_ability].base_damage + attacker->attackpower * attacker->abilities[chosen_ability].damage_multiplier * attacker->crit_bonus / 100 : attacker->abilities[chosen_ability].base_damage + attacker->attackpower * attacker->abilities[chosen_ability].damage_multiplier;
 	int damage = raw_damage > defender->defense ? std::round(raw_damage-defender->defense) : 1;
 	defender->update_current_health(-damage);
 	if (crit_flag)
@@ -28,13 +28,13 @@ int damage_calc(Characters* attacker, Characters* defender) {
 bool combat(Player* player, Enemy* enemy)
 {
 	bool result = false;
-	int ability;
+	int chosen_ability;
 	while (true)
 	{
 		player->print_stats();
 		enemy->print_stats();
-		ability = player->choose_ability();
-		damage_calc(player, enemy);
+		chosen_ability = player->choose_ability();
+		damage_calc(player, enemy, chosen_ability);
 		if (enemy->get_current_health() <= 0)
 		{
 			player->add_xp(enemy->get_xp());
@@ -45,8 +45,8 @@ bool combat(Player* player, Enemy* enemy)
 		continue_promt();
 		print_screen_seperator();
 		enemy->print_stats();
-		enemy->choose_ability();
-		damage_calc(enemy, player);
+		chosen_ability = enemy->choose_ability();
+		damage_calc(enemy, player, chosen_ability);
 		if (player->get_current_health() <= 0)
 		{
 			result = false;
@@ -246,9 +246,6 @@ int run() {
 	Enemy enemy;
 
 	player.prompt_set_player_name();
-
-	Ability normal_attack = Ability("[Normal Attack]", 0, 20, 0, 0);
-	Ability heavy_attack = Ability("[Heavy Attack]", 30, 0, 5, 1.2);
 
 	while (run)
 	{

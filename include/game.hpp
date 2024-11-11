@@ -2,7 +2,7 @@
 
 #include "character_classes.hpp"
 
-int damage_calc(Characters* attacker, Characters* defender);
+int damage_calc(Characters* attacker, Characters* defender, int ability);
 
 bool combat(Player* player, Enemy* enemy);
 
