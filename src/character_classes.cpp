@@ -417,8 +417,8 @@ void Characters::print_equipment()
 
 void Characters::add_basic_abilities()
 {
-	Ability normal_attack = Ability("[Normal Attack]", 0, 20, 0, 1);
-	Ability heavy_attack = Ability("[Heavy Attack]", 30, 0, 5, 1.2);
+	Ability normal_attack = Ability("Normal Attack", 0, 20, 0, 1);
+	Ability heavy_attack = Ability("Heavy Attack", 30, 0, 5, 1.2);
 	this->abilities.push_back(normal_attack);
 	this->abilities.push_back(heavy_attack);
 }
@@ -458,6 +458,23 @@ void Characters::print_stats()
 	<< std::to_string(this->crit_bonus) << "%" << std::endl;
 }
 
+bool Characters::use_rage_ability(Ability &ability)
+{
+	if (this->get_current_rage() < ability.resource_cost)
+	{
+		return false;
+	}
+	this->modify_current_rage(-ability.resource_cost);
+	this->modify_current_rage(ability.resource_generation_amount);
+
+	return true;
+}
+
+void Characters::print_rage()
+{
+	std::cout << "(" << std::to_string(this->get_current_rage()) << "/" << std::to_string(this->get_max_rage()) << ")" << std::endl;
+	return;
+}
 
 Enemy::Enemy(){}
 
@@ -533,13 +550,35 @@ int Enemy::choose_ability()
 	{
 		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i].name + "\n");
 	}
-	std::cout << ability_text;
+	// std::cout << ability_text;
+	// this->print_rage();
 	std::random_device rd;
 	std::mt19937 engine(rd());
 	std::uniform_int_distribution<int> dist(0, this->abilities.size()-1);
-	int attack_roll = dist(engine);
-	std::cout << ">>> " << std::to_string(attack_roll + 1) << std::endl;
-	std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll].name + " is used!" << std::endl;
+	
+	int attack_roll;
+
+	// TODO - Reduce the number of needed rolls by checking possibilities beforehand!
+	// while (true)
+	// {
+	// 	attack_roll = dist(engine);
+	// 	if (this->use_rage_ability(this->abilities[attack_roll])) {break;}
+	// }
+
+	// temporary solution
+	if (this->use_rage_ability(this->abilities[1]))
+	{
+		attack_roll = 1;
+	}
+	else
+	{
+		this->use_rage_ability(this->abilities[0]);
+		attack_roll = 0;
+	}
+
+	// std::cout << ">>> " << std::to_string(attack_roll + 1) << std::endl;
+	// std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll].name + " is used!" << std::endl;
+	std::cout << this->abilities[attack_roll].name + " is used!" << std::endl;
 	return attack_roll;
 }
 
@@ -650,21 +689,29 @@ int Player::choose_ability()
 	std::array<int,6> options;
 	for (int i = 0; i < this->abilities.size(); i++)
 	{
-		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i].name + "\n");
+		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i].name + "\t cost: " + std::to_string(this->abilities[i].resource_cost) + "\t gain: " + std::to_string(this->abilities[i].resource_generation_amount) + "\n");
 		options[i] = i+1;
 	}
     std::cout << ability_text;
+	this->print_rage();
     std::cout << ">>> ";
-	int ability;
+	int chosen_ability;
 	while (true)
 	{
-        if (std::cin >> ability)
+        if (std::cin >> chosen_ability)
         {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            if (std::find(options.begin(), options.end(), ability) != options.end())
+            
+			if (!this->use_rage_ability(this->abilities[chosen_ability-1]))
+			{
+				std::cout << "Not enough rage!\n>>> ";
+				continue;
+			}
+
+			if (std::find(options.begin(), options.end(), chosen_ability) != options.end())
             {
-                std::cout << std::to_string(ability) << " - " << this->abilities[ability-1].name << " is used!" << std::endl;
-                return ability;
+                std::cout << std::to_string(chosen_ability) << " - " << this->abilities[chosen_ability-1].name << " is used!" << std::endl;
+                return chosen_ability;
             }
             else
             {

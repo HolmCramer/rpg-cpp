@@ -9,9 +9,9 @@ Ability::Ability(
     int base_damage,
     float damage_multiplier)
     {
-    this->name = name;
-    this->resource_cost = resource_cost;
-    this->resource_generation_amount= resource_generation_amount;
-    this->base_damage = base_damage;
-    this->damage_multiplier = damage_multiplier;
+        this->name = "[" + name + "]";
+        this->resource_cost = resource_cost;
+        this->resource_generation_amount= resource_generation_amount;
+        this->base_damage = base_damage;
+        this->damage_multiplier = damage_multiplier;
     }

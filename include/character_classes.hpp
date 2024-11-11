@@ -146,6 +146,10 @@ class Characters {
 	void print_stats();
 
 	void add_basic_abilities();
+
+	bool use_rage_ability(Ability &ability);
+
+	void print_rage();
 };
 
 class Enemy: public Characters {
