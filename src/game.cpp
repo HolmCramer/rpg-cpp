@@ -3,6 +3,7 @@
 #include "../include/utils.hpp"
 #include <random>
 #include <cmath>
+#include "abilities.hpp"
 
 int damage_calc(Characters* attacker, Characters* defender) {
 	std::random_device rd;
@@ -245,6 +246,9 @@ int run() {
 	Enemy enemy;
 
 	player.prompt_set_player_name();
+
+	Ability normal_attack = Ability("[Normal Attack]", 0, 20, 0, 0);
+	Ability heavy_attack = Ability("[Heavy Attack]", 30, 0, 5, 1.2);
 
 	while (run)
 	{
