@@ -11,7 +11,9 @@ int damage_calc(Characters* attacker, Characters* defender, int chosen_ability) 
 	std::uniform_int_distribution<int> dist(1, 100);
 	int roll = dist(engine);
 	bool crit_flag = roll <= attacker->crit_chance ? true : false;
-	float raw_damage = crit_flag == true ? attacker->abilities[chosen_ability].base_damage + attacker->attackpower * attacker->abilities[chosen_ability].damage_multiplier * attacker->crit_bonus / 100 : attacker->abilities[chosen_ability].base_damage + attacker->attackpower * attacker->abilities[chosen_ability].damage_multiplier;
+	float crit_damage = attacker->abilities[chosen_ability].base_damage + attacker->attackpower * attacker->abilities[chosen_ability].damage_multiplier * attacker->crit_bonus / 100;
+	float normal_damage = attacker->abilities[chosen_ability].base_damage + attacker->attackpower * attacker->abilities[chosen_ability].damage_multiplier;
+	float raw_damage = crit_flag == true ? crit_damage : normal_damage;
 	int damage = raw_damage > defender->defense ? std::round(raw_damage-defender->defense) : 1;
 	defender->update_current_health(-damage);
 	if (crit_flag)

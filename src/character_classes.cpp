@@ -578,7 +578,7 @@ int Enemy::choose_ability()
 
 	// std::cout << ">>> " << std::to_string(attack_roll + 1) << std::endl;
 	// std::cout << std::to_string(attack_roll + 1) + " - " + this->abilities[attack_roll].name + " is used!" << std::endl;
-	std::cout << this->abilities[attack_roll].name + " is used!" << std::endl;
+	std::cout << "\t" << this->abilities[attack_roll].name << " is used!" << std::endl;
 	return attack_roll;
 }
 
@@ -645,9 +645,9 @@ void Player::skill_up()
 	while (this->skillpoints > 0)
 	{
 		if (std::cin >> input)
-        {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            switch (input)
+		{
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		switch (input)
 			{
 			case 1:
 				this->increment_stamina();
@@ -672,19 +672,19 @@ void Player::skill_up()
 				std::cout << "Enter a valid number!\n>>> ";
 				break;
 			}
-        }
-        else
-        {		
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Enter a valid number!\n>>> ";
-        }
+		}
+		else
+		{		
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Enter a valid number!\n>>> ";
+		}
 	}
 }
 
 int Player::choose_ability()
 {
-    std::cout << "How do you want to attack?" << std::endl;
+	std::cout << "How do you want to attack?" << std::endl;
 	std::string ability_text;
 	std::array<int,6> options;
 	for (int i = 0; i < this->abilities.size(); i++)
@@ -692,37 +692,37 @@ int Player::choose_ability()
 		ability_text.append("\t" + std::to_string(i+1) + " - " + this->abilities[i].name + "\t cost: " + std::to_string(this->abilities[i].resource_cost) + "\t gain: " + std::to_string(this->abilities[i].resource_generation_amount) + "\n");
 		options[i] = i+1;
 	}
-    std::cout << ability_text;
+	std::cout << ability_text;
 	this->print_rage();
-    std::cout << ">>> ";
+	std::cout << ">>> ";
 	int chosen_ability;
 	while (true)
 	{
-        if (std::cin >> chosen_ability)
-        {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            
+		if (std::cin >> chosen_ability)
+		{
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 			if (!this->use_rage_ability(this->abilities[chosen_ability-1]))
 			{
 				std::cout << "Not enough rage!\n>>> ";
 				continue;
 			}
 
-			if (std::find(options.begin(), options.end(), chosen_ability) != options.end())
-            {
-                std::cout << std::to_string(chosen_ability) << " - " << this->abilities[chosen_ability-1].name << " is used!" << std::endl;
-                return chosen_ability-1;
-            }
-            else
-            {
-                std::cout << "Enter a valid number!\n>>> ";
-            }
-        }
-        else
-        {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Enter a valid number!\n>>> ";
-        }
+		if (std::find(options.begin(), options.end(), chosen_ability) != options.end())
+		{
+			std::cout << "\t" << this->abilities[chosen_ability-1].name << " is used!" << std::endl;
+			return chosen_ability-1;
+		}
+		else
+		{
+			std::cout << "Enter a valid number!\n>>> ";
+		}
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Enter a valid number!\n>>> ";
+		}
 	}
 }
