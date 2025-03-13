@@ -4,6 +4,8 @@
 
 This is one of the first small projects I made during my reschooling to learn more about the C++ programming language and cmake. With the self imposed rule to to only use built-ins and no other dependencies except the built tool.
 
+I have originally written in python but moved it over to C++ later on.
+
 It's a simple turn based RPG for the CLI.
 
 ## Installation
